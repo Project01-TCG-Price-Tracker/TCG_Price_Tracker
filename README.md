@@ -1,1 +1,5 @@
-# TCG_Price_Tracker
+# TCG Price Tracker
+
+### Frameworks/Libraries Used
+
+[Materialize](https://materializecss.com/)
