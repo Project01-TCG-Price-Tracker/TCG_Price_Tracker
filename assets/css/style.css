@@ -10,7 +10,5 @@
     --eerieblack: #19191A;
     --logoyellow: #ffcb05;
     --logoyellowshadow: #c7a008;
-}
-.section > h4 {
-    color: var(--logoyellow);
+    --logoblue: #3B4CCA;
 }
