@@ -34,23 +34,83 @@
                     <div class="input-field">
                         <div class="container">
                             <div class="row">
-                                <div class="col s11">
+                                <div class="col s10">
                                     <input id="search" type="search" placeholder="Search" class="searchInput left blue darken-3 yellow-text darken-1" required>
                                 </div>
                                 <div class="col s1">
-                                    <a href="#" class="btn-floating btn-large searchButton right indigo darken-4"><i class="material-icons center">search</i></a>
+                                    <a href="#" class="btn btn-small searchButton right indigo darken-4"><i class="material-icons">search</i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </form>
             <li><div class="divider"></div></li>
-            <li><div class="container">
+            <li><div class="container" id="criteriaContainer">
                 <div class="row">
-                    
+                    <h5>Search Criteria</h5>
                 </div>
+                <div class="row">
+                    <div class="col s6">
+                        <form action="#">
+                            <p>
+                                <label>
+                                <input type="checkbox" class="filled-in" />
+                                <span>Rarity</span>
+                            </label>
+                        </p>
+                    </form>
+                    </div>
+                    <div class="col s6 push-s1">
+                        <a class="dropdown-trigger btn-small waves-effect" href="#" data-target="dropdown1">Select...</a>
+                        <ul id="dropdown1" class="dropdown-content">
+                        <li>Amazing Rare</li>
+                        <li>Common</li>
+                        <li>LEGEND</li>
+                        <li>Promo</li>
+                        <li>Rare</li>
+                        <li>Rare ACE</li>
+                        <li>Rare BREAK</li>
+                        <li>Rare Holo</li>
+                        <li>Rare Holo EX</li>
+                        <li>Rare Holo GX</li>
+                        <li>Rare Holo LV.X</li>
+                        <li>Rare Holo Star</li>
+                        <li>Rare Holo V</li>
+                        <li>Rare Holo VMAX</li>
+                        <li>Rare Prime</li>
+                        <li>Rare Prism Star</li>
+                        <li>Rare Rainbow</li>
+                        <li>Rare Secret</li>
+                        <li>Rare Shining</li>
+                        <li>Rare Shiny</li>
+                        <li>Rare Shiny GX</li>
+                        <li>Rare Ultra</li>
+                        <li>Uncommon</li>
+                    </ul>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                    <div class="row">
+                        <div class="col s6">
+                            <form action="#">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" class="filled-in" />
+                                        <span>Supertype</span>
+                                    </label>
+                                </p>
+                            </form>
+                        </div>
+                        <div class="col s6 push-s1">
+                            <a class="dropdown-trigger btn-small center waves-effect" href="#" data-target="dropdown2">Select...</a>
+                            <ul id="dropdown2" class="dropdown-content">
+                                <li>Energy</li>
+                                <li>Pokémon</li>
+                                <li>Trainer</li>
+                            </ul>
+                        </div>
+                    </div>
             </div></li>
-            <li><a class="waves-effect" href="#!"></a></li>
         </ul>        
     </header>
     <main>
@@ -143,5 +203,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js%22%3E"></script>
     <script src="./assets/js/script.js"></script>
+    <script>$(document).ready(function() {
+        $(".sidenav").sidenav();
+        $(".dropdown-trigger").dropdown();
+    })</script>
 </body>
 </html>

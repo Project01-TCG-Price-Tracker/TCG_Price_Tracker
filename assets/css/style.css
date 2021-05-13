@@ -12,3 +12,10 @@
     --logoyellowshadow: #c7a008;
     --logoblue: #3B4CCA;
 }
+
+#criteriaContainer {
+    width: 90%;
+    margin-top: 1em;
+    border: 2px solid var(--mandarin);
+    border-radius: 5px;
+}
