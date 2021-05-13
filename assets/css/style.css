@@ -1,0 +1,21 @@
+:root {
+    --mandarin: #EF8354;
+    --sealbrown: #4B1B07;
+    --halogreen: #1F3320;
+    --seagreen: #8CBA8F;
+    --gunmetal: #213545;
+    --airsupblue: #82A8C4;
+    --cultured: #F5F5F5;
+    --grayweb: #878788;
+    --eerieblack: #19191A;
+    --logoyellow: #ffcb05;
+    --logoyellowshadow: #c7a008;
+    --logoblue: #3B4CCA;
+}
+
+#criteriaContainer {
+    width: 90%;
+    margin-top: 1em;
+    border: 2px solid var(--mandarin);
+    border-radius: 5px;
+}
