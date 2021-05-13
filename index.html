@@ -6,19 +6,206 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="https://kit.fontawesome.com/a7b215c748.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    
+    <header>
+        <nav>
+            <div class="nav-wrapper blue darken-4">
+                <a href="#" data-target="slide-out" class="sidenav-trigger left yellow-text text-accent-3"><i class="material-icons">menu_open</i></a>
+                <div class="container">
+
+                    <div class="row">
+                        <a href="./index.html" class="brand-logo center yellow-text text-darken-4"><img src="./assets/images/tcgpt-logo_rs2.png" alt="TCG Price Tracker Logo" class="responsive-img"></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <ul id="slide-out" class="sidenav sidenav-fixed blue darken-4">
+            <li><div class="background">
+                    <img class="responsive-img" src="./assets/images/pokemon-10484.png">
+            </div></li>
+            <li>
+                <form>
+                    <div class="input-field">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col s10">
+                                    <input id="search" type="search" placeholder="Search" class="searchInput left blue darken-3 yellow-text darken-1" required>
+                                </div>
+                                <div class="col s1">
+                                    <a href="#" class="btn btn-small searchButton right indigo darken-4"><i class="material-icons">search</i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            <li><div class="divider"></div></li>
+            <li><div class="container" id="criteriaContainer">
+                <div class="row">
+                    <h5>Search Criteria</h5>
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                        <form action="#">
+                            <p>
+                                <label>
+                                <input type="checkbox" class="filled-in" />
+                                <span>Rarity</span>
+                            </label>
+                        </p>
+                    </form>
+                    </div>
+                    <div class="col s6 push-s1">
+                        <a class="dropdown-trigger btn-small waves-effect" href="#" data-target="dropdown1">Select...</a>
+                        <ul id="dropdown1" class="dropdown-content">
+                        <li>Amazing Rare</li>
+                        <li>Common</li>
+                        <li>LEGEND</li>
+                        <li>Promo</li>
+                        <li>Rare</li>
+                        <li>Rare ACE</li>
+                        <li>Rare BREAK</li>
+                        <li>Rare Holo</li>
+                        <li>Rare Holo EX</li>
+                        <li>Rare Holo GX</li>
+                        <li>Rare Holo LV.X</li>
+                        <li>Rare Holo Star</li>
+                        <li>Rare Holo V</li>
+                        <li>Rare Holo VMAX</li>
+                        <li>Rare Prime</li>
+                        <li>Rare Prism Star</li>
+                        <li>Rare Rainbow</li>
+                        <li>Rare Secret</li>
+                        <li>Rare Shining</li>
+                        <li>Rare Shiny</li>
+                        <li>Rare Shiny GX</li>
+                        <li>Rare Ultra</li>
+                        <li>Uncommon</li>
+                    </ul>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                    <div class="row">
+                        <div class="col s6">
+                            <form action="#">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" class="filled-in" />
+                                        <span>Supertype</span>
+                                    </label>
+                                </p>
+                            </form>
+                        </div>
+                        <div class="col s6 push-s1">
+                            <a class="dropdown-trigger btn-small center waves-effect" href="#" data-target="dropdown2">Select...</a>
+                            <ul id="dropdown2" class="dropdown-content">
+                                <li>Energy</li>
+                                <li>Pokémon</li>
+                                <li>Trainer</li>
+                            </ul>
+                        </div>
+                    </div>
+            </div></li>
+        </ul>        
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m6 offset-l3 offset-xl2">
+                    <div id="search-results" class="section scrollspy">
+                        <h3 class="left ">Search Results</h3>
+                    </div>
+                </div>
+            </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="search-results-box">
+                            <div class="card">
+                                <div class="col s12 m4 l3 xl2 offset-l2">
+                                    <div class="card-image">
+                                        <img class="responsive-img card-art" src="./assets/images/Pokemon_TCG_cardback.jpg">
+                                        <!-- Favorite button inserted here // Image replaced above -->
+                                    </div>
+                                    <div class="card-content">
+                                        <!-- Card info and link displayed here -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="col s12 m4 l3 xl2 offset-l2">
+                                    <div class="card-image">
+                                        <img class="responsive-img card-art" src="./assets/images/Pokemon_TCG_cardback.jpg">
+                                        <a href="#" class="btn-floating halfway-fab waves-effect waves-light yellow accent-4"><i class="material-icons">star</i></a>
+                                    </div>
+                                    <div class="card-content"> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="col s12 m4 l3 xl2 offset-l2">
+                                    <div class="card-image">
+                                        <img class="responsive-img card-art" src="./assets/images/Pokemon_TCG_cardback.jpg">
+                                        <a href="#" class="btn-floating halfway-fab waves-effect waves-light yellow accent-4"><i class="material-icons">star</i></a>
+                                    </div>
+                                    <div class="card-content">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="col s12 m4 l3 xl2 offset-l2">
+                                    <div class="card-image">
+                                        <img class="responsive-img card-art" src="./assets/images/Pokemon_TCG_cardback.jpg">
+                                        <a href="#" class="btn-floating halfway-fab waves-effect waves-light yellow accent-4"><i class="material-icons">star</i></a>
+                                    </div>
+                                    <div class="card-content">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="col s12 m4 l3 xl2 offset-l2">
+                                    <div class="card-image">
+                                        <img class="responsive-img card-art" src="./assets/images/Pokemon_TCG_cardback.jpg">
+                                        <a href="#" class="btn-floating halfway-fab waves-effect waves-light yellow accent-4"><i class="material-icons">star</i></a>
+                                    </div>
+                                    <div class="card-content">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="col s12 m4 l3 xl2 offset-l2">
+                                    <div class="card-image">
+                                        <img class="responsive-img card-art" src="./assets/images/Pokemon_TCG_cardback.jpg">
+                                        <a href="#" class="btn-floating halfway-fab waves-effect waves-light yellow accent-4"><i class="material-icons">star</i></a>
+                                    </div>
+                                    <div class="card-content">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ul class="pagination">
+                            <!-- Append page numbers to search results here -->
+                        </ul>
+                    </div>
+                </div>
+        </div>
+    </main>
     <script
         src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
         crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js%22%3E"></script>
     <script src="./assets/js/script.js"></script>
+    <script>$(document).ready(function() {
+        $(".sidenav").sidenav();
+        $(".dropdown-trigger").dropdown();
+    })</script>
 </body>
 </html>
