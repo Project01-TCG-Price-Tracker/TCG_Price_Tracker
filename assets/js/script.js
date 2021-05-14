@@ -48,57 +48,59 @@ function createUrl(name) {
 // function to create pagination buttons
 
 function createPagination() {
-    var paginationEl = $('<ul>').addClass('pagination col s12 push-s1')
-    var pageAmount = (totalResults - ((paginationIndex * 8) * 8))/8
-    var leftArrowItem = $('<li>').addClass('waves-effect prevButton')
-    var leftIcon = $('<i>').addClass('material-icons').text('chevron_left')
-    leftArrowItem.append(leftIcon)
-    paginationEl.append(leftArrowItem)
-    for(i = 0;i < pageAmount && i < 8; i++) {
-        var pageButton = $('<li>').addClass('waves-effect pageButton').data('index', i + (paginationIndex*8))
-        if(pageIndex === i + (paginationIndex*8)) {
-            pageButton.addClass('active blue darken-4')
+    if(cardData.length != 0) {
+        var paginationEl = $('<ul>').addClass('pagination col s12 push-s1')
+        var pageAmount = (totalResults - ((paginationIndex * 12) * 8))/12
+        var leftArrowItem = $('<li>').addClass('waves-effect prevButton')
+        var leftIcon = $('<i>').addClass('material-icons').text('chevron_left')
+        leftArrowItem.append(leftIcon)
+        paginationEl.append(leftArrowItem)
+        for(i = 0;i < pageAmount && i < 8; i++) {
+            var pageButton = $('<li>').addClass('waves-effect pageButton').data('index', i + (paginationIndex*8))
+            if(pageIndex === i + (paginationIndex*8)) {
+                pageButton.addClass('active blue darken-4')
+            }
+            var pageLink = $('<a>').text(i + 1 + (paginationIndex*8))
+            pageButton.append(pageLink)
+            paginationEl.append(pageButton);
         }
-        var pageLink = $('<a>').text(i + 1 + (paginationIndex*8))
-        pageButton.append(pageLink)
-        paginationEl.append(pageButton);
+        var rightArrowItem = $('<li>').addClass('waves-effect nextButton')
+        var rightIcon = $('<i>').addClass('material-icons').text('chevron_right')
+        rightArrowItem.append(rightIcon)
+        paginationEl.append(rightArrowItem)
+        resultsDiv.append(paginationEl);
+        $('.pageButton').on('click', function() {
+            pageIndex = $(this).data('index')
+            searchCards();
+        })
+        $('.nextButton').on('click', function() {
+            var totalPageButtons = $('.pageButton')
+            if((pageIndex + 1)%8 === 0) {
+                paginationIndex ++;
+                pageIndex ++;
+            }
+            else if((pageIndex + 1) - (paginationIndex*8) < totalPageButtons.length) {
+                pageIndex ++;
+            }
+            searchCards();
+        })
+        $('.prevButton').on('click', function() {
+            if((pageIndex)%8 === 0 && pageIndex != 0) {
+                paginationIndex --;
+                pageIndex --;
+            }
+            else if(pageIndex > 0) {
+                pageIndex --;
+            }
+            if(pageIndex === 0) {
+                $('.prevButton').addClass('disabled')
+            }
+            if((pageIndex + 1) === cardData.length/8) {
+                $('.nextButton').addClass('disabled')
+            }
+            searchCards();
+        })
     }
-    var rightArrowItem = $('<li>').addClass('waves-effect nextButton')
-    var rightIcon = $('<i>').addClass('material-icons').text('chevron_right')
-    rightArrowItem.append(rightIcon)
-    paginationEl.append(rightArrowItem)
-    resultsDiv.append(paginationEl);
-    $('.pageButton').on('click', function() {
-        pageIndex = $(this).data('index')
-        searchCards();
-    })
-    $('.nextButton').on('click', function() {
-        var totalPageButtons = $('.pageButton')
-        if((pageIndex + 1)%8 === 0) {
-            paginationIndex ++;
-            pageIndex ++;
-        }
-        else if((pageIndex + 1) - (paginationIndex*8) < totalPageButtons.length) {
-            pageIndex ++;
-        }
-        searchCards();
-    })
-    $('.prevButton').on('click', function() {
-        if((pageIndex)%8 === 0 && pageIndex != 0) {
-            paginationIndex --;
-            pageIndex --;
-        }
-        else if(pageIndex > 0) {
-            pageIndex --;
-        }
-        if(pageIndex === 0) {
-            $('.prevButton').addClass('disabled')
-        }
-        if((pageIndex + 1) === cardData.length/8) {
-            $('.nextButton').addClass('disabled')
-        }
-        searchCards();
-    })
 }
 
 // function to pull card data when search button is clicked
@@ -123,11 +125,11 @@ function pullCardData(){
 function searchCards() {
     resultsDiv.empty()
     createPagination();
-    var pageModifier = pageIndex*8;
+    var pageModifier = pageIndex*12;
     var cardsRow = $('<div>').addClass('row center')
-    var divider = $('<div>').addClass('col s12')
-    for (i = pageModifier; i < (pageModifier+8); i++) {
+    for (i = pageModifier; i < (pageModifier+12); i++) {
         if(cardData[i] != undefined) {
+            var divider = $('<div>').addClass('col s12')
             var cardContainer = $("<div>").addClass('cardContainer col s3 push-s1')
             var imageContainer = $('<div>')
             var textContainer = $('<div>')
@@ -170,12 +172,16 @@ function searchCards() {
             textContainer.append(priceEl)
             cardContainer.append(textContainer)
             cardsRow.append(cardContainer)
-            if(i - (pageIndex*8) === 3) {
+            if(i - (pageIndex*12) === 3 || i - (pageIndex*12) === 7) {
                 cardsRow.append(divider)
             } 
         }
     }
     resultsDiv.append(cardsRow);
+    if(cardData.length === 0) {
+        var noResults = $("<h4>").text("No Results Found!").addClass("col s12 center push-s1")
+        resultsDiv.append(noResults);
+    }
     $('.materialboxed').materialbox();
 }
 
