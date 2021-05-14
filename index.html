@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </form>
-            <li><div class="divider"></div></li>
+            <li><div class="divider"></div></option>
             <li><div class="container" id="criteriaContainer">
                 <div class="row">
                     <h5>Search Criteria</h5>
@@ -50,62 +50,56 @@
                 <div class="row">
                     <div class="col s6">
                         <form action="#">
-                            <p>
-                                <label>
-                                <input type="checkbox" class="filled-in" />
+                            <label for="rarityCheck">
+                                <input type="checkbox" class="filled-in" id="rarityCheck"/>
                                 <span>Rarity</span>
                             </label>
-                        </p>
                     </form>
                     </div>
-                    <div class="col s6 push-s1">
-                        <a class="dropdown-trigger btn-small waves-effect" href="#" data-target="dropdown1">Select...</a>
-                        <ul id="dropdown1" class="dropdown-content">
-                        <li>Amazing Rare</li>
-                        <li>Common</li>
-                        <li>LEGEND</li>
-                        <li>Promo</li>
-                        <li>Rare</li>
-                        <li>Rare ACE</li>
-                        <li>Rare BREAK</li>
-                        <li>Rare Holo</li>
-                        <li>Rare Holo EX</li>
-                        <li>Rare Holo GX</li>
-                        <li>Rare Holo LV.X</li>
-                        <li>Rare Holo Star</li>
-                        <li>Rare Holo V</li>
-                        <li>Rare Holo VMAX</li>
-                        <li>Rare Prime</li>
-                        <li>Rare Prism Star</li>
-                        <li>Rare Rainbow</li>
-                        <li>Rare Secret</li>
-                        <li>Rare Shining</li>
-                        <li>Rare Shiny</li>
-                        <li>Rare Shiny GX</li>
-                        <li>Rare Ultra</li>
-                        <li>Uncommon</li>
-                    </ul>
+                    <div class="col s6">
+                        <select id="dropdown1" class="browser-default">
+                            <option value="0" >Amazing Rare</option>
+                            <option value="1" selected>Common</option>
+                            <option value="2">LEGEND</option>
+                            <option value="3">Promo</option>
+                            <option value="4">Rare</option>
+                            <option value="5">Rare ACE</option>
+                            <option value="6">Rare BREAK</option>
+                            <option value="7">Rare Holo</option>
+                            <option value="8">Rare Holo EX</option>
+                            <option value="9">Rare Holo GX</option>
+                            <option value="10">Rare Holo LV.X</option>
+                            <option value="11">Rare Holo Star</option>
+                            <option value="12">Rare Holo V</option>
+                            <option value="13">Rare Holo VMAX</option>
+                            <option value="14">Rare Prime</option>
+                            <option value="15">Rare Prism Star</option>
+                            <option value="16">Rare Rainbow</option>
+                            <option value="17">Rare Secret</option>
+                            <option value="18">Rare Shining</option>
+                            <option value="19">Rare Shiny</option>
+                            <option value="20">Rare Shiny GX</option>
+                            <option value="21">Rare Ultra</option>
+                            <option value="22">Uncommon</option>
+                        </select>
                     </div>
                 </div>
                 <div class="divider"></div>
-                    <div class="row">
+                    <div class="row" id="supertypeRow">
                         <div class="col s6">
                             <form action="#">
-                                <p>
-                                    <label>
-                                        <input type="checkbox" class="filled-in" />
+                                    <label for="supertypeCheck">
+                                        <input type="checkbox" class="filled-in" id="supertypeCheck"/>
                                         <span>Supertype</span>
                                     </label>
-                                </p>
                             </form>
                         </div>
-                        <div class="col s6 push-s1">
-                            <a class="dropdown-trigger btn-small center waves-effect" href="#" data-target="dropdown2">Select...</a>
-                            <ul id="dropdown2" class="dropdown-content">
-                                <li>Energy</li>
-                                <li>Pokémon</li>
-                                <li>Trainer</li>
-                            </ul>
+                        <div class="col s6">
+                            <select id="dropdown2" class="browser-default">
+                                <option value="0">Energy</option>
+                                <option value="1" selected>Pokémon</option>
+                                <option value="2">Trainer</option>
+                            </select>
                         </div>
                     </div>
             </div></li>
@@ -121,75 +115,87 @@
                 </div>
             </div>
                 <div class="container center">
-                    <div class="row">
+                    <div class="row center">
                         <div class="searchResults">
-                            <div class="card">
-                                <div class="col s12 m4 l3 xl2 offset-l2">
+                            <ul class="pagination col s12 push-s1">
+                                <li class="prevButton"><i class="material-icons">chevron_left</i></li>
+                                <li class="nextButton"><i class="material-icons">chevron_right</i></li>
+                            </ul>
+                            <div class="row center">
+                                <div class="card col s3 push-s1">
                                     <div class="card-image">
-                                        <img class="responsive-img card-art" src="./assets/images/Pokemon_TCG_cardback.jpg">
-                                        <!-- Favorite button inserted here // Image replaced above -->
-                                    </div>
-                                    <div class="card-content">
-                                        <!-- Card info and link displayed here -->
+                                        <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
+                                        <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card">
-                                <div class="col s12 m4 l3 xl2 offset-l2">
+                                <div class="card col s3 push-s1">
                                     <div class="card-image">
-                                        <img class="responsive-img card-art" src="./assets/images/Pokemon_TCG_cardback.jpg">
-                                        <a href="#" class="btn-floating halfway-fab waves-effect waves-light yellow accent-4"><i class="material-icons">star</i></a>
-                                    </div>
-                                    <div class="card-content"> 
+                                        <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
+                                        <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card">
-                                <div class="col s12 m4 l3 xl2 offset-l2">
+                                <div class="card col s3 push-s1">
                                     <div class="card-image">
-                                        <img class="responsive-img card-art" src="./assets/images/Pokemon_TCG_cardback.jpg">
-                                        <a href="#" class="btn-floating halfway-fab waves-effect waves-light yellow accent-4"><i class="material-icons">star</i></a>
-                                    </div>
-                                    <div class="card-content">
+                                        <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
+                                        <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card">
-                                <div class="col s12 m4 l3 xl2 offset-l2">
+                                <div class="card col s3 push-s1">
                                     <div class="card-image">
-                                        <img class="responsive-img card-art" src="./assets/images/Pokemon_TCG_cardback.jpg">
-                                        <a href="#" class="btn-floating halfway-fab waves-effect waves-light yellow accent-4"><i class="material-icons">star</i></a>
-                                    </div>
-                                    <div class="card-content">
+                                        <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
+                                        <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card">
-                                <div class="col s12 m4 l3 xl2 offset-l2">
+                                <div class="card col s3 push-s1">
                                     <div class="card-image">
-                                        <img class="responsive-img card-art" src="./assets/images/Pokemon_TCG_cardback.jpg">
-                                        <a href="#" class="btn-floating halfway-fab waves-effect waves-light yellow accent-4"><i class="material-icons">star</i></a>
-                                    </div>
-                                    <div class="card-content">
+                                        <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
+                                        <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card">
-                                <div class="col s12 m4 l3 xl2 offset-l2">
+                                <div class="card col s3 push-s1">
                                     <div class="card-image">
-                                        <img class="responsive-img card-art" src="./assets/images/Pokemon_TCG_cardback.jpg">
-                                        <a href="#" class="btn-floating halfway-fab waves-effect waves-light yellow accent-4"><i class="material-icons">star</i></a>
+                                        <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
+                                        <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
-                                    <div class="card-content">
+                                </div>
+                                <div class="card col s3 push-s1">
+                                    <div class="card-image">
+                                        <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
+                                        <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
+                                    </div>
+                                </div>
+                                <div class="card col s3 push-s1">
+                                    <div class="card-image">
+                                        <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
+                                        <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
+                                    </div>
+                                </div>
+                                <div class="card col s3 push-s1">
+                                    <div class="card-image">
+                                        <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
+                                        <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
+                                    </div>
+                                </div>
+                                <div class="card col s3 push-s1">
+                                    <div class="card-image">
+                                        <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
+                                        <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
+                                    </div>
+                                </div>
+                                <div class="card col s3 push-s1">
+                                    <div class="card-image">
+                                        <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
+                                        <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
+                                    </div>
+                                </div>
+                                <div class="card col s3 push-s1">
+                                    <div class="card-image">
+                                        <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
+                                        <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <ul class="pagination">
-                            <!-- Append page numbers to search results here -->
-                        </ul>
                     </div>
                 </div>
         </div>
