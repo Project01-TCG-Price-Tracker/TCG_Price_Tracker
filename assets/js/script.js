@@ -133,7 +133,7 @@ function searchCards() {
             var cardContainer = $("<div>").addClass('cardContainer col s3 push-s1')
             var imageContainer = $('<div>')
             var textContainer = $('<div>')
-            var favButton = $('<a>').addClass('btn-floating yellow accent-4').attr('style', "top: -30px")
+            var favButton = $('<a>').addClass('btn-floating yellow accent-4 favbutton').attr('style', "top: -30px").data('card', cardData[i].id)
             var favIcon = $('<i>').addClass('material-icons').text("star")
             var name = cardData[i].name
             var set = cardData[i].set.name
@@ -175,6 +175,10 @@ function searchCards() {
             if(i - (pageIndex*12) === 3 || i - (pageIndex*12) === 7) {
                 cardsRow.append(divider)
             } 
+            if(i === 249) {
+                var maxWarning = $('<h4>').text('Max results reached - Narrow your search criteria to see more!').addClass('col s12 center push-s1')
+                cardsRow.append(maxWarning)
+            }
         }
     }
     resultsDiv.append(cardsRow);
@@ -182,9 +186,36 @@ function searchCards() {
         var noResults = $("<h4>").text("No Results Found!").addClass("col s12 center push-s1")
         resultsDiv.append(noResults);
     }
+    $('.favbutton').on('click', function() {
+        var id = $(this).data('card')
+        var savedFavorites = JSON.parse(localStorage.getItem('favorites'))
+        if(savedFavorites == null) {
+            localStorage.setItem('favorites', [])
+            savedFavorites = []
+        }
+        var favUrl = `https://api.pokemontcg.io/v2/cards/${id}`
+        $.ajax({
+            url:favUrl,
+            method: "GET",
+            headers: {'X-Api-Key': 'c86ef810-3077-4361-80a8-0124aa67fc83'},
+        }).then(function(response) {
+            var data = JSON.stringify(response.data)
+            var checkArray = savedFavorites.indexOf(data)
+            if(checkArray === -1) {
+                savedFavorites.push(data)
+                localStorage.setItem('favorites', JSON.stringify(savedFavorites))
+                console.log(savedFavorites)
+            } else {
+                savedFavorites.splice(checkArray, 1)
+                localStorage.setItem('favorites', JSON.stringify(savedFavorites))
+                console.log(savedFavorites)
+
+            }
+        })
+
+    })
     $('.materialboxed').materialbox();
 }
-
 // function to run when webpage is loaded
 
 function init() {
