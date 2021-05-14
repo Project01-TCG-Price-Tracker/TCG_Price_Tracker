@@ -144,18 +144,18 @@ function searchCards() {
                 var prices = $.map(prePrices, function (value, index) {
                     return [value]
                 })
-                var finalPrice = JSON.stringify(prices[0].mid);
-                if(finalPrice.includes('.')) {
-                    var periodIndex = finalPrice.indexOf('.')
-                    console.log(periodIndex)
-                    var cents = finalPrice.substr(periodIndex)
-                    if(cents.length == 2) {
-                        finalPrice = finalPrice + "0"
+                if (prices[0] != undefined) {
+                    var finalPrice = JSON.stringify(prices[0].mid);
+                    if(finalPrice.includes('.')) {
+                        var periodIndex = finalPrice.indexOf('.')
+                        console.log(periodIndex)
+                        var cents = finalPrice.substr(periodIndex)
+                        if(cents.length == 2) {
+                            finalPrice = finalPrice + "0"
+                        }
+                    } else {
+                        finalPrice = finalPrice + ".00"
                     }
-                } else {
-                    finalPrice = finalPrice + ".00"
-                }
-                if(prices[0] != undefined) {
                     priceEl.text(`$${finalPrice}`)
                 }
                 else {

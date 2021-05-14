@@ -14,8 +14,23 @@
 }
 
 #criteriaContainer {
-    width: 90%;
+    width: 85%;
     margin-top: 1em;
-    border: 2px solid var(--mandarin);
+    padding: 1em;
+    border: 2px solid var(--logoyellow);
     border-radius: 5px;
+    background: var(--logoblue);
+}
+#supertypeRow {
+    margin-top: 1.5em;
+}
+
+select {
+    font-size: 85%;
+}
+@media only screen and (min-width: 992px) {
+    .container
+    .center {
+        float: right;
+    }
 }
