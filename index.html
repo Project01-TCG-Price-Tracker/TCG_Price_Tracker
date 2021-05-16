@@ -51,36 +51,37 @@
                     <div class="col s6">
                         <form action="#">
                             <label for="rarityCheck">
-                                <input type="checkbox" class="filled-in" id="rarityCheck"/>
+                                <input type="checkbox" name="rarityCheck" class="filled-in" id="rarityCheck"/>
                                 <span>Rarity</span>
                             </label>
                     </form>
                     </div>
                     <div class="col s6">
-                        <select id="dropdown1" class="browser-default">
-                            <option value="0" >Amazing Rare</option>
-                            <option value="1" selected>Common</option>
-                            <option value="2">LEGEND</option>
-                            <option value="3">Promo</option>
-                            <option value="4">Rare</option>
-                            <option value="5">Rare ACE</option>
-                            <option value="6">Rare BREAK</option>
-                            <option value="7">Rare Holo</option>
-                            <option value="8">Rare Holo EX</option>
-                            <option value="9">Rare Holo GX</option>
-                            <option value="10">Rare Holo LV.X</option>
-                            <option value="11">Rare Holo Star</option>
-                            <option value="12">Rare Holo V</option>
-                            <option value="13">Rare Holo VMAX</option>
-                            <option value="14">Rare Prime</option>
-                            <option value="15">Rare Prism Star</option>
-                            <option value="16">Rare Rainbow</option>
-                            <option value="17">Rare Secret</option>
-                            <option value="18">Rare Shining</option>
-                            <option value="19">Rare Shiny</option>
-                            <option value="20">Rare Shiny GX</option>
-                            <option value="21">Rare Ultra</option>
-                            <option value="22">Uncommon</option>
+                        <select id="dropdown1" class="browser-default rarityDropdown">
+                            <option value="" disabled selected>Choose:</option>
+                            <option value="amazing rare">Amazing Rare</option>
+                            <option value="common">Common</option>
+                            <option value="legend">LEGEND</option>
+                            <option value="promo">Promo</option>
+                            <option value="rare">Rare</option>
+                            <option value="rare ace">Rare ACE</option>
+                            <option value="rare break">Rare BREAK</option>
+                            <option value="rare holo">Rare Holo</option>
+                            <option value="rare holo ex">Rare Holo EX</option>
+                            <option value="rare holo gx">Rare Holo GX</option>
+                            <option value="rare holo lv.x">Rare Holo LV.X</option>
+                            <option value="rare holo star">Rare Holo Star</option>
+                            <option value="rare holo v">Rare Holo V</option>
+                            <option value="rare holo vmax">Rare Holo VMAX</option>
+                            <option value="rare prime">Rare Prime</option>
+                            <option value="rare prism star">Rare Prism Star</option>
+                            <option value="rare rainbow">Rare Rainbow</option>
+                            <option value="rare secret">Rare Secret</option>
+                            <option value="rare shining">Rare Shining</option>
+                            <option value="rare shiny">Rare Shiny</option>
+                            <option value="rare shiny gx">Rare Shiny GX</option>
+                            <option value="rare ultra">Rare Ultra</option>
+                            <option value="uncommon">Uncommon</option>
                         </select>
                     </div>
                 </div>
@@ -89,16 +90,17 @@
                         <div class="col s6">
                             <form action="#">
                                     <label for="supertypeCheck">
-                                        <input type="checkbox" class="filled-in" id="supertypeCheck"/>
+                                        <input type="checkbox" name="supertypeCheck" class="filled-in" id="supertypeCheck"/>
                                         <span>Supertype</span>
                                     </label>
                             </form>
                         </div>
                         <div class="col s6">
-                            <select id="dropdown2" class="browser-default">
-                                <option value="0">Energy</option>
-                                <option value="1" selected>Pokémon</option>
-                                <option value="2">Trainer</option>
+                            <select id="dropdown2" class="browser-default supertypeDropdown">
+                                <option value="" disabled selected>Choose:</option>
+                                <option value="energy">Energy</option>
+                                <option value="pokemon">Pokémon</option>
+                                <option value="trainer">Trainer</option>
                             </select>
                         </div>
                     </div>
