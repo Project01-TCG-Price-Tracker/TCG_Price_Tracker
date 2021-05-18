@@ -1,13 +1,13 @@
 
 // global variables for page elements
 
-var resultsDiv = $('.searchResults')
-var searchButton = $('.searchButton')
-var searchInput = $('.searchInput')
-var rarityCheck = $('.rarityCheck')
-var supertypeCheck = $('.supertypeCheck')
-var rarityDropdown = $('.rarityDropdown')
-var supertypeDropdown = $('.supertypeDropdown')
+var resultsDiv = $('.searchResults');
+var searchButton = $('.searchButton');
+var searchInput = $('.searchInput');
+var rarityCheck = $('#rarityCheck');
+var supertypeCheck = $('#supertypeCheck');
+var rarityDropdown = $('.rarityDropdown');
+var supertypeDropdown = $('.supertypeDropdown');
 
 // global variables for timer/price mode
 
@@ -19,31 +19,49 @@ var finalSearchUrl = '';
 var pageIndex = 0;
 var paginationIndex = 0;
 var totalResults;
-var rarityChosen = false;
-var supertypeChosen = false;
+var rarityChosen = rarityCheck[0].checked;
+var supertypeChosen = supertypeCheck[0].checked;
 var cardData;
+
+
+// listener to add functionality to checks 
+
+rarityCheck.on("click", function() {
+    if (rarityChosen == false) {
+        rarityChosen = true;
+    } else {
+        rarityChosen = false;
+    }
+});
+supertypeCheck.on("click", function() {
+    if (supertypeChosen == false) {
+        supertypeChosen = true;
+    } else {
+        supertypeChosen = false;
+    }
+});
+
 
 // function to check criteria and create API URL
 
 function createUrl(name) {
     var baseUrl = `https://api.pokemontcg.io/v2/cards?q=name:${name}*`
     var searchUrl = ''
-    if(rarityChosen && supertypeChosen) {
-        var rarityChoice = rarityDropdown.val()
-        var supertypeChoice = supertypeDropdown.val()
-        searchUrl = `${baseUrl} supertype:${supertypeChoice} rarity:${rarityChoice}`
-    } else if(rarityChosen && !supertypeChosen) {
-        var rarityChoice = rarityDropdown.val()
-        searchUrl = `${baseUrl} rarity:${rarityChoice}`
-    } else if(supertypeChosen && !rarityChosen) {
-        var supertypeChoice = supertypeDropdown.val()
-        searchUrl = `${baseUrl} supertype:${supertypeChoice}`
+    if(rarityChosen == true && supertypeChosen == true) {
+        var rarityChoice = JSON.stringify(rarityDropdown.val());
+        var supertypeChoice = JSON.stringify(supertypeDropdown.val());
+        searchUrl = `${baseUrl} supertype:${supertypeChoice} rarity:${rarityChoice}`;
+    } else if(rarityChosen == true && supertypeChosen == false) {
+        var rarityChoice = JSON.stringify(rarityDropdown.val());
+        searchUrl = `${baseUrl} rarity:${rarityChoice}`;
+    } else if(supertypeChosen == true && rarityChosen == false) {
+        var supertypeChoice = JSON.stringify(supertypeDropdown.val());
+        searchUrl = `${baseUrl} supertype:${supertypeChoice}`;
     } else {
         searchUrl = baseUrl
     }
     finalSearchUrl = searchUrl;
 }
-
 
 // function to create pagination buttons
 
@@ -230,3 +248,15 @@ function init() {
 }
 
 init()
+
+// keypress listener to run search on enter key pressed
+
+searchInput.keypress(function(event) {
+    if (event.which == 13) {
+        event.preventDefault();
+        pageIndex = 0;
+        paginationIndex = 0;
+        pullCardData();
+        searchInput.val("");
+    }
+})
