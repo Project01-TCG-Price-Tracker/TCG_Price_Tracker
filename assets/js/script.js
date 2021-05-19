@@ -305,13 +305,14 @@ function init() {
         pullCardData();
         
     })  
-    searchInput.keypress(function(event) {
+    // keypress listener to run search on enter key pressed
+    $(document).keypress(function(event) {
         if (event.which == 13) {
             event.preventDefault();
+            favoritesShown = false;
             pageIndex = 0;
             paginationIndex = 0;
             pullCardData();
-            searchInput.val("");
         }
     })
     viewFavoritesButton.on('click', function() {
@@ -324,4 +325,3 @@ function init() {
 
 init()
 
-// keypress listener to run search on enter key pressed
