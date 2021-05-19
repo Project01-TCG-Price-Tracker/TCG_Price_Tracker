@@ -8,6 +8,8 @@ var rarityCheck = $('#rarityCheck');
 var supertypeCheck = $('#supertypeCheck');
 var rarityDropdown = $('.rarityDropdown');
 var supertypeDropdown = $('.supertypeDropdown');
+var viewFavoritesButton = $('.viewFavorites')
+var resultsDivHeader = $(".resultsDivText")
 
 // global variables for timer/price mode
 
@@ -22,6 +24,7 @@ var totalResults;
 var rarityChosen = rarityCheck[0].checked;
 var supertypeChosen = supertypeCheck[0].checked;
 var cardData;
+var favoritesShown = false;
 
 
 // listener to add functionality to checks 
@@ -138,10 +141,32 @@ function pullCardData(){
 
 }
 
+// function to populate with favorites
+
+function populateFavorites() {
+    var favoriteList = localStorage.getItem('favorites')
+    if(favoriteList != undefined) {
+        cardDataPre = JSON.parse(favoriteList)
+        totalResults = cardDataPre.length
+        cardData = [];
+        for(i = 0;i < cardDataPre.length;i++) {
+            var cardObject = JSON.parse(cardDataPre[i])
+            cardData.push(cardObject);
+        }
+        searchCards();
+    }
+}
+
 // function to populate cards in the searchResults div
 
 function searchCards() {
     resultsDiv.empty()
+    if(favoritesShown) {
+        resultsDivHeader.text('Favorites List')
+    }
+    else {
+        resultsDivHeader.text('Search Results')
+    }
     createPagination();
     var pageModifier = pageIndex*12;
     var cardsRow = $('<div>').addClass('row center')
@@ -229,6 +254,9 @@ function searchCards() {
                 console.log(savedFavorites)
 
             }
+            if(favoritesShown) {
+                populateFavorites()
+            }
         })
 
     })
@@ -242,21 +270,26 @@ function init() {
     searchButton.on('click', function() {
         pageIndex = 0
         paginationIndex = 0;
+        favoritesShown = false;
         pullCardData();
         
     })  
+    searchInput.keypress(function(event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            pageIndex = 0;
+            paginationIndex = 0;
+            pullCardData();
+            searchInput.val("");
+        }
+    })
+    viewFavoritesButton.on('click', function() {
+        favoritesShown = true;
+        populateFavorites();
+    })
+    favoritesShown = false;
 }
 
 init()
 
 // keypress listener to run search on enter key pressed
-
-searchInput.keypress(function(event) {
-    if (event.which == 13) {
-        event.preventDefault();
-        pageIndex = 0;
-        paginationIndex = 0;
-        pullCardData();
-        searchInput.val("");
-    }
-})
