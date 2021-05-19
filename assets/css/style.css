@@ -21,13 +21,14 @@
     border-radius: 5px;
     background: var(--logoblue);
 }
-#supertypeRow {
-    margin-top: 1.5em;
+.criteriaRow {
+    margin-top: 0.25em;
+    margin-bottom: 0.5em;
 }
-
 select {
     font-size: 85%;
 }
+
 [type="checkbox"].filled-in:checked+span:not(.lever):after {
     border: 2px solid var(--logoyellowshadow);
     background: var(--logoyellowshadow);
@@ -37,4 +38,6 @@ select {
     .center {
         float: right;
     }
+
 } */
+
