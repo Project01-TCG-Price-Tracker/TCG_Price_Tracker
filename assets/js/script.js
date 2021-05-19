@@ -6,10 +6,15 @@ var searchButton = $('.searchButton');
 var searchInput = $('.searchInput');
 var rarityCheck = $('#rarityCheck');
 var supertypeCheck = $('#supertypeCheck');
+var subtypeCheck = $("#subtypeCheck");
+var typesCheck = $("#typeCheck");
 var rarityDropdown = $('.rarityDropdown');
 var supertypeDropdown = $('.supertypeDropdown');
-var viewFavoritesButton = $('.viewFavorites')
-var resultsDivHeader = $(".resultsDivText")
+var subtypeDropdown = $(".subtypeDropdown")
+var typesDropdown = $(".typeDropdown");
+var viewFavoritesButton = $('.viewFavorites');
+var resultsDivHeader = $(".resultsDivText");
+
 
 // global variables for timer/price mode
 
@@ -23,6 +28,8 @@ var paginationIndex = 0;
 var totalResults;
 var rarityChosen = rarityCheck[0].checked;
 var supertypeChosen = supertypeCheck[0].checked;
+var subtypeChosen = supertypeCheck[0].checked;
+var typeChosen = typesCheck[0].checked;
 var cardData;
 var favoritesShown = false;
 var favoritesList = [];
@@ -44,28 +51,56 @@ supertypeCheck.on("click", function() {
         supertypeChosen = false;
     }
 });
+subtypeCheck.on("click", function() {
+    if (subtypeChosen == false) {
+        subtypeChosen = true;
+    } else {
+        subtypeChosen = false;
+    }
+});
+typesCheck.on("click", function() {
+    if (typeChosen == false) {
+        typeChosen = true;
+    } else {
+        typeChosen = false;
+    }
+});
 
 
 // function to check criteria and create API URL
 
 function createUrl(name) {
     var baseUrl = `https://api.pokemontcg.io/v2/cards?q=name:${name}`
-    var searchUrl = ''
-    if(rarityChosen == true && supertypeChosen == true) {
+    // if ((rarityDropdown.val() == null && rarityChosen == true) || 
+    //     (supertypeDropdown.val() == null && supertypeChosen == true) ||
+    //     (typesDropdown.val() == null && typeChosen == true)) {
+    //         finalSearchUrl = baseUrl;
+    // } 
+    if (rarityChosen == true) {
         var rarityChoice = JSON.stringify(rarityDropdown.val());
-        var supertypeChoice = JSON.stringify(supertypeDropdown.val());
-        searchUrl = `${baseUrl} supertype:${supertypeChoice} rarity:${rarityChoice}`;
-    } else if(rarityChosen == true && supertypeChosen == false) {
-        var rarityChoice = JSON.stringify(rarityDropdown.val());
-        searchUrl = `${baseUrl} rarity:${rarityChoice}`;
-    } else if(supertypeChosen == true && rarityChosen == false) {
-        var supertypeChoice = JSON.stringify(supertypeDropdown.val());
-        searchUrl = `${baseUrl} supertype:${supertypeChoice}`;
-    } else {
-        searchUrl = baseUrl
+        if (rarityChoice != "null") {
+            baseUrl = `${baseUrl} rarity:${rarityChoice}`
+        }
     }
-    console.log(searchUrl)
-    finalSearchUrl = searchUrl;
+    if (supertypeChosen == true) {
+        var supertypeChoice = JSON.stringify(supertypeDropdown.val());
+        if (supertypeChoice != "null") {
+            baseUrl = `${baseUrl} supertype:${supertypeChoice}`;
+        }
+    }
+    if (subtypeChosen == true) {
+        var subtypeChoice = JSON.stringify(subtypeDropdown.val());
+        if (subtypeChoice != null) {
+            baseUrl = `${baseUrl} subtypes:${subtypeChoice}`;
+        }
+    }
+    if (typeChosen == true) {
+        var typeChoice = JSON.stringify(typesDropdown.val());
+        if (typeChoice != "null") {
+            baseUrl = `${baseUrl} types:${typeChoice}`;
+        }
+    }
+    finalSearchUrl = baseUrl;
 }
 
 // function to create pagination buttons
@@ -141,7 +176,6 @@ function pullCardData(){
         totalResults = cardData.length
         searchCards();
     })
-
 }
 
 // function to save favorites list locally as objects
