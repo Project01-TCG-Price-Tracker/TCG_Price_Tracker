@@ -25,6 +25,7 @@ var rarityChosen = rarityCheck[0].checked;
 var supertypeChosen = supertypeCheck[0].checked;
 var cardData;
 var favoritesShown = false;
+var favoritesList = [];
 
 
 // listener to add functionality to checks 
@@ -141,25 +142,35 @@ function pullCardData(){
 
 }
 
+// function to save favorites list locally as objects
+
+function loadFavorites() {
+    var favoritesListPre = localStorage.getItem('favorites')
+    if(favoritesListPre != undefined) {
+        cardDataPre = JSON.parse(favoritesListPre)
+        favoritesList = [];
+        for(i = 0;i < cardDataPre.length;i++) {
+            var cardObject = JSON.parse(cardDataPre[i])
+            favoritesList.push(cardObject);
+        }
+
+  }
+
+}
+
 // function to populate with favorites
 
 function populateFavorites() {
-    var favoriteList = localStorage.getItem('favorites')
-    if(favoriteList != undefined) {
-        cardDataPre = JSON.parse(favoriteList)
-        totalResults = cardDataPre.length
-        cardData = [];
-        for(i = 0;i < cardDataPre.length;i++) {
-            var cardObject = JSON.parse(cardDataPre[i])
-            cardData.push(cardObject);
-        }
-        searchCards();
+    loadFavorites();
+    totalResults = favoritesList.length;
+    cardData = favoritesList;
+    searchCards();
     }
-}
 
 // function to populate cards in the searchResults div
 
 function searchCards() {
+    loadFavorites();
     resultsDiv.empty()
     if(favoritesShown) {
         resultsDivHeader.text('Favorites List')
@@ -176,7 +187,15 @@ function searchCards() {
             var cardContainer = $("<div>").addClass('cardContainer col s3 push-s1')
             var imageContainer = $('<div>')
             var textContainer = $('<div>')
-            var favButton = $('<a>').addClass('btn-floating yellow accent-4 favbutton').attr('style', "top: -30px").data('card', cardData[i].id)
+            var favButton = $('<a>').addClass('btn-floating favbutton waves-effect grey').attr('style', "top: -30px").data('card', cardData[i].id)
+            for(l = 0;l < favoritesList.length; l++) {
+                if(favoritesList[l].id === cardData[i].id) {
+                    favButton.addClass('yellow accent-4')
+                }
+                else {
+                    favButton.addClass('grey')
+                }
+            }
             var favIcon = $('<i>').addClass('material-icons').text("star")
             var name = cardData[i].name
             var set = cardData[i].set.name
@@ -219,15 +238,23 @@ function searchCards() {
                 cardsRow.append(divider)
             } 
             if(i === 249) {
-                var maxWarning = $('<h4>').text('Max results reached - Narrow your search criteria to see more!').addClass('col s12 center push-s1')
-                cardsRow.append(maxWarning)
+                if(favoritesShown != true) {
+                    var maxWarning = $('<h4>').text('Max results reached - Narrow your search criteria to see more!').addClass('col s12 center push-s1')
+                    cardsRow.append(maxWarning)
+                }
             }
         }
     }
     resultsDiv.append(cardsRow);
     if(cardData.length === 0) {
-        var noResults = $("<h4>").text("No Results Found!").addClass("col s12 center push-s1")
-        resultsDiv.append(noResults);
+        if(favoritesShown) {
+            var noResults = $("<h4>").text("No Favorites Added!").addClass("col s12 center push-s1")
+            resultsDiv.append(noResults);
+        }
+        else {
+            var noResults = $("<h4>").text("No Results Found!").addClass("col s12 center push-s1")
+            resultsDiv.append(noResults);
+        }
     }
     $('.favbutton').on('click', function() {
         var id = $(this).data('card')
@@ -255,8 +282,12 @@ function searchCards() {
 
             }
             if(favoritesShown) {
-                populateFavorites()
+                populateFavorites();
             }
+            else {
+                searchCards();
+            }
+
         })
 
     })
@@ -285,6 +316,7 @@ function init() {
     })
     viewFavoritesButton.on('click', function() {
         favoritesShown = true;
+        pageIndex = 0;
         populateFavorites();
     })
     favoritesShown = false;
