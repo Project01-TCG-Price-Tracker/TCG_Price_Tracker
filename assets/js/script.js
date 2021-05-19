@@ -49,7 +49,7 @@ supertypeCheck.on("click", function() {
 // function to check criteria and create API URL
 
 function createUrl(name) {
-    var baseUrl = `https://api.pokemontcg.io/v2/cards?q=name:${name}*`
+    var baseUrl = `https://api.pokemontcg.io/v2/cards?q=name:${name}`
     var searchUrl = ''
     if(rarityChosen == true && supertypeChosen == true) {
         var rarityChoice = JSON.stringify(rarityDropdown.val());
@@ -64,6 +64,7 @@ function createUrl(name) {
     } else {
         searchUrl = baseUrl
     }
+    console.log(searchUrl)
     finalSearchUrl = searchUrl;
 }
 
@@ -129,6 +130,7 @@ function createPagination() {
 
 function pullCardData(){
     var name = searchInput.val();
+    name = `"${name}*"`
     createUrl(name);
     $.ajax({
         url: finalSearchUrl,
@@ -153,9 +155,7 @@ function loadFavorites() {
             var cardObject = JSON.parse(cardDataPre[i])
             favoritesList.push(cardObject);
         }
-
   }
-
 }
 
 // function to populate with favorites
@@ -187,14 +187,17 @@ function searchCards() {
             var cardContainer = $("<div>").addClass('cardContainer col s3 push-s1')
             var imageContainer = $('<div>')
             var textContainer = $('<div>')
-            var favButton = $('<a>').addClass('btn-floating favbutton waves-effect grey').attr('style', "top: -30px").data('card', cardData[i].id)
+            var favButton = $('<a>').addClass('btn-floating favbutton').attr('style', "top: -30px").data('card', cardData[i].id)
             for(l = 0;l < favoritesList.length; l++) {
                 if(favoritesList[l].id === cardData[i].id) {
-                    favButton.addClass('yellow accent-4')
+                    favButton.addClass('yellow accent-4 waves-effect')
                 }
                 else {
-                    favButton.addClass('grey')
+                    favButton.addClass('grey waves-effect waves-yellow')
                 }
+            }
+            if(favoritesList.length == 0) {
+                favButton.addClass('grey')
             }
             var favIcon = $('<i>').addClass('material-icons').text("star")
             var name = cardData[i].name
