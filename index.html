@@ -27,25 +27,25 @@
         </nav>
         <ul id="slide-out" class="sidenav sidenav-fixed blue darken-4">
             <li><div class="background">
-                    <img class="responsive-img" src="./assets/images/pokemon-10484.png">
+                <img class="responsive-img" src="./assets/images/pokemon-10484.png">
             </div></li>
-            <li>
-                <form>
-                    <div class="input-field">
-                        <div class="row">
-                            <div class="col s2">
-                                <label class="label-icon" for="search"><a href="#!" class="btn-floating waves-effect waves-light yellow searchButton"><i class="material-icons black-text">search</i></a></label>
+                <li><div class="divider"></div>
+                    <li><div class="container" id="criteriaContainer">
+                        <form>
+                            <div class="input-field">
+                                <div class="row">
+                                    <div class="col s9" id="inputColDiv">
+                                        <input id="search" type="search" placeholder=" Search" class="blue darken-3 yellow-text darken-1 searchInput" required>
+                                    </div>
+                                    <div class="col s3 valign-wrapper">
+                                        <label class="label-icon" for="search"><a href="#!" class="btn-floating waves-effect waves-light yellow searchButton"><i class="material-icons black-text searchLabel">search</i></a></label>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col s10">
-                                <input id="search" type="search" placeholder=" Search" class="blue darken-3 yellow-text darken-1 searchInput" required>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            <li><div class="divider"></div></option>
-            <li><div class="container" id="criteriaContainer">
+                        </form>
+                    <div class="divider"></div>
                 <div class="row">
-                    <h5>Search Criteria</h5>
+                    <h6>Filter Your Search</h6>
                 </div>
                 <div class="row">
                     <div class="col s6">
@@ -104,6 +104,33 @@
                             </select>
                         </div>
                     </div>
+                    <div class="divider"></div>
+                    <div class="row" id="typesRow">
+                        <div class="col s6">
+                            <form action="#">
+                                <label for="typeCheck">
+                                    <input type="checkbox" name="typeCheck" class="filled-in" id="typeCheck" />
+                                    <span>Type</span>
+                                </label>
+                            </form>
+                        </div>
+                        <div class="col s6">
+                            <select class="browser-default typeDropdown" id="dropdown3">
+                                <option value="" disabled selected>Choose:</option>
+                                <option value="colorless">Colorless</option>
+                                <option value="darkness">Darkness</option>
+                                <option value="dragon">Dragon</option>
+                                <option value="fairy">Fairy</option>
+                                <option value="fighting">Fighting</option>
+                                <option value="fire">Fire</option>
+                                <option value="grass">Grass</option>
+                                <option value="lightning">Lightning</option>
+                                <option value="metal">Metal</option>
+                                <option value="psychic">Psychic</option>
+                                <option value="water">Water</option>
+                            </select>
+                        </div>
+                    </div>
             </div></li>
         </ul>        
     </header>
@@ -112,85 +139,85 @@
             <div class="row">
                 <div class="col s12 m6 offset-l3 offset-xl2">
                     <div id="search-results" class="section scrollspy">
-                        <h3 class="left ">Search Results</h3>
+                        <h3 class="right">Search Results</h3>
                     </div>
                 </div>
             </div>
                 <div class="container center">
                     <div class="row center">
                         <div class="searchResults">
-                            <ul class="pagination col s12 push-s1">
+                            <ul class="pagination col s12">
                                 <li class="prevButton"><i class="material-icons">chevron_left</i></li>
                                 <li class="nextButton"><i class="material-icons">chevron_right</i></li>
                             </ul>
                             <div class="row center">
-                                <div class="card col s3 push-s1">
+                                <div class="card col s3">
                                     <div class="card-image">
                                         <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
                                         <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
-                                <div class="card col s3 push-s1">
+                                <div class="card col s3">
                                     <div class="card-image">
                                         <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
                                         <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
-                                <div class="card col s3 push-s1">
+                                <div class="card col s3">
                                     <div class="card-image">
                                         <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
                                         <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
-                                <div class="card col s3 push-s1">
+                                <div class="card col s3">
                                     <div class="card-image">
                                         <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
                                         <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
-                                <div class="card col s3 push-s1">
+                                <div class="card col s3">
                                     <div class="card-image">
                                         <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
                                         <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
-                                <div class="card col s3 push-s1">
+                                <div class="card col s3">
                                     <div class="card-image">
                                         <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
                                         <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
-                                <div class="card col s3 push-s1">
+                                <div class="card col s3">
                                     <div class="card-image">
                                         <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
                                         <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
-                                <div class="card col s3 push-s1">
+                                <div class="card col s3">
                                     <div class="card-image">
                                         <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
                                         <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
-                                <div class="card col s3 push-s1">
+                                <div class="card col s3">
                                     <div class="card-image">
                                         <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
                                         <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
-                                <div class="card col s3 push-s1">
+                                <div class="card col s3">
                                     <div class="card-image">
                                         <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
                                         <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
-                                <div class="card col s3 push-s1">
+                                <div class="card col s3">
                                     <div class="card-image">
                                         <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
                                         <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>
                                     </div>
                                 </div>
-                                <div class="card col s3 push-s1">
+                                <div class="card col s3">
                                     <div class="card-image">
                                         <img src="./assets/images/Pokemon_TCG_cardback.jpg" alt="Cardback placeholder" class="responsive-img">
                                         <a class="btn-floating yellow accent-4" style="top: -30px"><i class="material-icons">star</i></a>

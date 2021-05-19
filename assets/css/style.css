@@ -24,17 +24,17 @@
 #supertypeRow {
     margin-top: 1.5em;
 }
-
+#typesRow {
+    margin-top: 1.5em;
+}
+#inputColDiv {
+    padding-right: 0;
+}
 select {
     font-size: 85%;
 }
+
 [type="checkbox"].filled-in:checked+span:not(.lever):after {
     border: 2px solid var(--logoyellowshadow);
     background: var(--logoyellowshadow);
-}
-@media only screen and (min-width: 992px) {
-    .container
-    .center {
-        float: right;
-    }
 }
