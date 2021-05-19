@@ -6,10 +6,14 @@ var searchButton = $('.searchButton');
 var searchInput = $('.searchInput');
 var rarityCheck = $('#rarityCheck');
 var supertypeCheck = $('#supertypeCheck');
+var subtypeCheck = $("#subtypeCheck");
 var typesCheck = $("#typeCheck");
 var rarityDropdown = $('.rarityDropdown');
 var supertypeDropdown = $('.supertypeDropdown');
+var subtypeDropdown = $(".subtypeDropdown")
 var typesDropdown = $(".typeDropdown");
+var viewFavoritesButton = $('.viewFavorites');
+var resultsDivHeader = $(".resultsDivText");
 
 // global variables for timer/price mode
 
@@ -23,8 +27,10 @@ var paginationIndex = 0;
 var totalResults;
 var rarityChosen = rarityCheck[0].checked;
 var supertypeChosen = supertypeCheck[0].checked;
+var subtypeChosen = supertypeCheck[0].checked;
 var typeChosen = typesCheck[0].checked;
 var cardData;
+var favoritesShown = false;
 
 
 // listener to add functionality to checks 
@@ -43,54 +49,56 @@ supertypeCheck.on("click", function() {
         supertypeChosen = false;
     }
 });
+subtypeCheck.on("click", function() {
+    if (subtypeChosen == false) {
+        subtypeChosen = true;
+    } else {
+        subtypeChosen = false;
+    }
+});
 typesCheck.on("click", function() {
     if (typeChosen == false) {
         typeChosen = true;
     } else {
-        typeChosen = true;
+        typeChosen = false;
     }
-})
+});
 
 
 // function to check criteria and create API URL
 
 function createUrl(name) {
-    var baseUrl = `https://api.pokemontcg.io/v2/cards?q=name:${name}*`
-    var searchUrl = ''
-    if ((rarityDropdown.val() == null && rarityChosen == true) || 
-        (supertypeDropdown.val() == null && supertypeChosen == true) ||
-        (typesDropdown.val() == null && typeChosen == true)) {
-            searchUrl = baseUrl;
-    } else if(rarityChosen == true && supertypeChosen == true && typeChosen == true) {
+    var baseUrl = `https://api.pokemontcg.io/v2/cards?q=name:${name}`
+    // if ((rarityDropdown.val() == null && rarityChosen == true) || 
+    //     (supertypeDropdown.val() == null && supertypeChosen == true) ||
+    //     (typesDropdown.val() == null && typeChosen == true)) {
+    //         finalSearchUrl = baseUrl;
+    // } 
+    if (rarityChosen == true) {
         var rarityChoice = JSON.stringify(rarityDropdown.val());
+        if (rarityChoice != "null") {
+            baseUrl = `${baseUrl} rarity:${rarityChoice}`
+        }
+    }
+    if (supertypeChosen == true) {
         var supertypeChoice = JSON.stringify(supertypeDropdown.val());
+        if (supertypeChoice != "null") {
+            baseUrl = `${baseUrl} supertype:${supertypeChoice}`;
+        }
+    }
+    if (subtypeChosen == true) {
+        var subtypeChoice = JSON.stringify(subtypeDropdown.val());
+        if (subtypeChoice != null) {
+            baseUrl = `${baseUrl} subtypes:${subtypeChoice}`;
+        }
+    }
+    if (typeChosen == true) {
         var typeChoice = JSON.stringify(typesDropdown.val());
-        searchUrl = `${baseUrl} supertype:${supertypeChoice} rarity:${rarityChoice} types:${typeChoice}`;
-    } else if(rarityChosen == true && supertypeChosen == false && typeChosen == false) {
-        var rarityChoice = JSON.stringify(rarityDropdown.val());
-        searchUrl = `${baseUrl} rarity:${rarityChoice}`;
-    } else if(supertypeChosen == true && rarityChosen == false && typeChosen == false) {
-        var supertypeChoice = JSON.stringify(supertypeDropdown.val());
-        searchUrl = `${baseUrl} supertype:${supertypeChoice}`;
-    } else if (typeChosen == true && rarityChosen == false & supertypeChosen == false) {
-        var typeChoice = JSON.stringify(typesDropdown.val());
-        searchUrl = `${baseUrl} types:${typeChoice}`;
-    } else if (rarityChosen == true && supertypeChosen == true && typeChosen == false) {
-        var rarityChoice = JSON.stringify(rarityDropdown.val());
-        var supertypeChoice = JSON.stringify(supertypeDropdown.val());
-        searchUrl = `${baseUrl} supertype:${supertypeChoice} rarity:${rarityChoice}`
-    } else if (rarityChosen == true && typeChosen == true && supertypeChosen == false) {
-        var rarityChoice = JSON.stringify(rarityDropdown.val());
-        var typeChoice = JSON.stringify(typesDropdown.val());
-        searchUrl = `${baseUrl} rarity:${rarityChoice} types:${typeChoice}`;
-    } else if (typeChosen == true && supertypeChosen == true && rarityChosen == false) {
-        var typeChoice = JSON.stringify(typesDropdown.val());
-        var supertypeChoice = JSON.stringify(supertypeDropdown.val());
-        searchUrl = `${baseUrl} types:${typeChoice} supertype:${supertypeChoice}`;
-    } else {
-        searchUrl = baseUrl
-    } 
-    finalSearchUrl = searchUrl;
+        if (typeChoice != "null") {
+            baseUrl = `${baseUrl} types:${typeChoice}`;
+        }
+    }
+    finalSearchUrl = baseUrl;
 }
 
 // function to create pagination buttons
@@ -155,6 +163,7 @@ function createPagination() {
 
 function pullCardData(){
     var name = searchInput.val();
+    name = `"${name}*"`
     createUrl(name);
     $.ajax({
         url: finalSearchUrl,
@@ -168,10 +177,32 @@ function pullCardData(){
 
 }
 
+// function to populate with favorites
+
+function populateFavorites() {
+    var favoriteList = localStorage.getItem('favorites')
+    if(favoriteList != undefined) {
+        cardDataPre = JSON.parse(favoriteList)
+        totalResults = cardDataPre.length
+        cardData = [];
+        for(i = 0;i < cardDataPre.length;i++) {
+            var cardObject = JSON.parse(cardDataPre[i])
+            cardData.push(cardObject);
+        }
+        searchCards();
+    }
+}
+
 // function to populate cards in the searchResults div
 
 function searchCards() {
     resultsDiv.empty()
+    if(favoritesShown) {
+        resultsDivHeader.text('Favorites List')
+    }
+    else {
+        resultsDivHeader.text('Search Results')
+    }
     createPagination();
     var pageModifier = pageIndex*12;
     var cardsRow = $('<div>').addClass('row center')
@@ -259,6 +290,9 @@ function searchCards() {
                 console.log(savedFavorites)
 
             }
+            if(favoritesShown) {
+                populateFavorites()
+            }
         })
 
     })
@@ -272,21 +306,26 @@ function init() {
     searchButton.on('click', function() {
         pageIndex = 0
         paginationIndex = 0;
+        favoritesShown = false;
         pullCardData();
         
     })  
+    searchInput.keypress(function(event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            pageIndex = 0;
+            paginationIndex = 0;
+            pullCardData();
+            searchInput.val("");
+        }
+    })
+    viewFavoritesButton.on('click', function() {
+        favoritesShown = true;
+        populateFavorites();
+    })
+    favoritesShown = false;
 }
 
 init()
 
 // keypress listener to run search on enter key pressed
-
-searchInput.keypress(function(event) {
-    if (event.which == 13) {
-        event.preventDefault();
-        pageIndex = 0;
-        paginationIndex = 0;
-        pullCardData();
-        searchInput.val("");
-    }
-})

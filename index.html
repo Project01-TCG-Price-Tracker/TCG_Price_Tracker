@@ -34,112 +34,153 @@
                         <form>
                             <div class="input-field">
                                 <div class="row">
-                                    <div class="col s9" id="inputColDiv">
+                                    <div class="col s12" id="inputColDiv">
                                         <input id="search" type="search" placeholder=" Search" class="blue darken-3 yellow-text darken-1 searchInput" required>
-                                    </div>
-                                    <div class="col s3 valign-wrapper">
-                                        <label class="label-icon" for="search"><a href="#!" class="btn-floating waves-effect waves-light yellow searchButton"><i class="material-icons black-text searchLabel">search</i></a></label>
                                     </div>
                                 </div>
                             </div>
                         </form>
-                    <div class="divider"></div>
-                <div class="row">
-                    <h6>Filter Your Search</h6>
-                </div>
-                <div class="row">
+                        <div class="divider"></div>
+                        <div class="row">
+                            <h6>Filter Your Results</h6>
+                        </div>
+                        <div class="row">
+                            <div class="col s6">
+                                <form action="#">
+                                    <label for="rarityCheck">
+                                        <input type="checkbox" name="rarityCheck" class="filled-in" id="rarityCheck"/>
+                                        <span>Rarity</span>
+                                    </label>
+                                </form>
+                            </div>
+                            <div class="col s6">
+                                <select id="dropdown1" class="browser-default rarityDropdown">
+                                    <option value="" disabled selected>Choose:</option>
+                                    <option value="amazing rare">Amazing Rare</option>
+                                    <option value="common">Common</option>
+                                    <option value="legend">LEGEND</option>
+                                    <option value="promo">Promo</option>
+                                    <option value="rare">Rare</option>
+                                    <option value="rare ace">Rare ACE</option>
+                                    <option value="rare break">Rare BREAK</option>
+                                    <option value="rare holo">Rare Holo</option>
+                                    <option value="rare holo ex">Rare Holo EX</option>
+                                    <option value="rare holo gx">Rare Holo GX</option>
+                                    <option value="rare holo lv.x">Rare Holo LV.X</option>
+                                    <option value="rare holo star">Rare Holo Star</option>
+                                    <option value="rare holo v">Rare Holo V</option>
+                                    <option value="rare holo vmax">Rare Holo VMAX</option>
+                                    <option value="rare prime">Rare Prime</option>
+                                    <option value="rare prism star">Rare Prism Star</option>
+                                    <option value="rare rainbow">Rare Rainbow</option>
+                                    <option value="rare secret">Rare Secret</option>
+                                    <option value="rare shining">Rare Shining</option>
+                                    <option value="rare shiny">Rare Shiny</option>
+                                    <option value="rare shiny gx">Rare Shiny GX</option>
+                                    <option value="rare ultra">Rare Ultra</option>
+                                    <option value="uncommon">Uncommon</option>
+                                </select>
+                            </div>
+                        </div>
+                <div class="row" id="supertypeRow">
                     <div class="col s6">
                         <form action="#">
-                            <label for="rarityCheck">
-                                <input type="checkbox" name="rarityCheck" class="filled-in" id="rarityCheck"/>
-                                <span>Rarity</span>
+                            <label for="supertypeCheck">
+                                <input type="checkbox" name="supertypeCheck" class="filled-in" id="supertypeCheck"/>
+                                <span>Supertype</span>
                             </label>
-                    </form>
+                        </form>
                     </div>
                     <div class="col s6">
-                        <select id="dropdown1" class="browser-default rarityDropdown">
+                        <select id="dropdown2" class="browser-default supertypeDropdown">
                             <option value="" disabled selected>Choose:</option>
-                            <option value="amazing rare">Amazing Rare</option>
-                            <option value="common">Common</option>
-                            <option value="legend">LEGEND</option>
-                            <option value="promo">Promo</option>
-                            <option value="rare">Rare</option>
-                            <option value="rare ace">Rare ACE</option>
-                            <option value="rare break">Rare BREAK</option>
-                            <option value="rare holo">Rare Holo</option>
-                            <option value="rare holo ex">Rare Holo EX</option>
-                            <option value="rare holo gx">Rare Holo GX</option>
-                            <option value="rare holo lv.x">Rare Holo LV.X</option>
-                            <option value="rare holo star">Rare Holo Star</option>
-                            <option value="rare holo v">Rare Holo V</option>
-                            <option value="rare holo vmax">Rare Holo VMAX</option>
-                            <option value="rare prime">Rare Prime</option>
-                            <option value="rare prism star">Rare Prism Star</option>
-                            <option value="rare rainbow">Rare Rainbow</option>
-                            <option value="rare secret">Rare Secret</option>
-                            <option value="rare shining">Rare Shining</option>
-                            <option value="rare shiny">Rare Shiny</option>
-                            <option value="rare shiny gx">Rare Shiny GX</option>
-                            <option value="rare ultra">Rare Ultra</option>
-                            <option value="uncommon">Uncommon</option>
+                            <option value="energy">Energy</option>
+                            <option value="pokemon">Pokémon</option>
+                            <option value="trainer">Trainer</option>
                         </select>
                     </div>
                 </div>
-                <div class="divider"></div>
-                    <div class="row" id="supertypeRow">
-                        <div class="col s6">
-                            <form action="#">
-                                    <label for="supertypeCheck">
-                                        <input type="checkbox" name="supertypeCheck" class="filled-in" id="supertypeCheck"/>
-                                        <span>Supertype</span>
-                                    </label>
-                            </form>
-                        </div>
-                        <div class="col s6">
-                            <select id="dropdown2" class="browser-default supertypeDropdown">
-                                <option value="" disabled selected>Choose:</option>
-                                <option value="energy">Energy</option>
-                                <option value="pokemon">Pokémon</option>
-                                <option value="trainer">Trainer</option>
-                            </select>
-                        </div>
+                <div class="row" id="subtypesRow">
+                    <div class="col s6">
+                        <form action="#">
+                            <label for="subtypeCheck">
+                                <input type="checkbox" name="subtypeCheck" class="filled-in" id="subtypeCheck">
+                                <span>Subtype</span>
+                            </label>
+                        </form>
                     </div>
-                    <div class="divider"></div>
-                    <div class="row" id="typesRow">
-                        <div class="col s6">
-                            <form action="#">
-                                <label for="typeCheck">
-                                    <input type="checkbox" name="typeCheck" class="filled-in" id="typeCheck" />
-                                    <span>Type</span>
-                                </label>
-                            </form>
-                        </div>
-                        <div class="col s6">
-                            <select class="browser-default typeDropdown" id="dropdown3">
-                                <option value="" disabled selected>Choose:</option>
-                                <option value="colorless">Colorless</option>
-                                <option value="darkness">Darkness</option>
-                                <option value="dragon">Dragon</option>
-                                <option value="fairy">Fairy</option>
-                                <option value="fighting">Fighting</option>
-                                <option value="fire">Fire</option>
-                                <option value="grass">Grass</option>
-                                <option value="lightning">Lightning</option>
-                                <option value="metal">Metal</option>
-                                <option value="psychic">Psychic</option>
-                                <option value="water">Water</option>
-                            </select>
-                        </div>
+                    <div class="col s6">
+                        <select class="browser-default subtypeDropdown" id="dropdown3">
+                            <option value="" disabled selected>Choose:</option>
+                            <option value="break">BREAK</option>
+                            <option value="baby">Baby</option>
+                            <option value="basic">Basic</option>
+                            <option value="ex">EX</option>
+                            <option value="gx">GX</option>
+                            <option value="goldenrod game corner">Goldenrod Game Corner</option>
+                            <option value="item">Item</option>
+                            <option value="legend">Legend</option>
+                            <option value="level-up">Level-Up</option>
+                            <option value="mega">MEGA</option>
+                            <option value="pokemon tool">Pokémon Tool</option>
+                            <option value="pokemon tool f">Pokémon Tool F</option>
+                            <option value="restored">Restored</option>
+                            <option value="rocket's secret machine">Rocket's Secret Machine</option>
+                            <option value="special">Special</option>
+                            <option value="stadium">Stadium</option>
+                            <option value="stage 1">Stage 1</option>
+                            <option value="stage 2">Stage 2</option>
+                            <option value="supporter">Supporter</option>
+                            <option value="tag team">TAG TEAM</option>
+                            <option value="technical machine">Technical Machine</option>
+                            <option value="v">V</option>
+                            <option value="vmax">VMAX</option>
+                        </select>
                     </div>
+                </div>
+                <div class="row" id="typesRow">
+                    <div class="col s6">
+                        <form action="#">
+                            <label for="typeCheck">
+                                <input type="checkbox" name="typeCheck" class="filled-in" id="typeCheck" />
+                                <span>Type</span>
+                            </label>
+                        </form>
+                    </div>
+                    <div class="col s6">
+                        <select class="browser-default typeDropdown" id="dropdown4">
+                            <option value="" disabled selected>Choose:</option>
+                            <option value="colorless">Colorless</option>
+                            <option value="darkness">Darkness</option>
+                            <option value="dragon">Dragon</option>
+                            <option value="fairy">Fairy</option>
+                            <option value="fighting">Fighting</option>
+                            <option value="fire">Fire</option>
+                            <option value="grass">Grass</option>
+                            <option value="lightning">Lightning</option>
+                            <option value="metal">Metal</option>
+                            <option value="psychic">Psychic</option>
+                            <option value="water">Water</option>
+                        </select>
+                    </div>
+                </div>
+                    <div class="col s12 center">
+                        <label class="label-icon" for="search"><a href="#!" class="btn-floating btn-large waves-effect waves-light yellow searchButton"><i class="material-icons black-text searchLabel">search</i></a></label>
+                    </div>
+            </div></li>
+            <li><div class="row center">
+                <div class="col s12">
+                    <a class="waves-effect waves-light btn blue accent-4 viewFavorites">Favorites</a>
+                </div>
             </div></li>
         </ul>        
     </header>
     <main>
         <div class="container">
             <div class="row">
-                <div class="col s12 m6 offset-l3 offset-xl2">
+                <div class="col s12 m6">
                     <div id="search-results" class="section scrollspy">
-                        <h3 class="right">Search Results</h3>
+                        <h3 class="center resultsDivText">Search Results</h3>
                     </div>
                 </div>
             </div>

@@ -27,8 +27,8 @@
 #typesRow {
     margin-top: 1.5em;
 }
-#inputColDiv {
-    padding-right: 0;
+#subtypesRow {
+    margin-top: 1.5em;
 }
 select {
     font-size: 85%;
@@ -38,3 +38,9 @@ select {
     border: 2px solid var(--logoyellowshadow);
     background: var(--logoyellowshadow);
 }
+/* @media only screen and (min-width: 992px) {
+    .container
+    .center {
+        float: right;
+    }
+} */
