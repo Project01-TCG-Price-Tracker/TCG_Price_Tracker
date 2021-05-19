@@ -15,6 +15,7 @@ var typesDropdown = $(".typeDropdown");
 var viewFavoritesButton = $('.viewFavorites');
 var resultsDivHeader = $(".resultsDivText");
 
+
 // global variables for timer/price mode
 
 
