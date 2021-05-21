@@ -269,10 +269,10 @@ function searchCards() {
     loadFavorites();
     resultsDiv.empty()
     if(favoritesShown) {
-        resultsDivHeader.text('Favorites List').addClass("float-right")
+        resultsDivHeader.text('Favorites List')
     }
     else {
-        resultsDivHeader.text('Search Results').addClass("float-right")
+        resultsDivHeader.text('Search Results')
     }
     createPagination();
     var pageModifier = pageIndex*12;
