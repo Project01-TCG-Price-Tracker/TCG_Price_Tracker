@@ -1,4 +1,5 @@
 // vars for html elements to be replaced
+var pageTitle = $("#indivPageTitle")
 var cardNameEl = $("#cardname");
 var setEl = $("#set");
 var cardArtDiv = $(".cardart");
@@ -40,6 +41,7 @@ function getCardInfo() {
 function appendCardInfo() {
     var chosenCurrency = currencySelector.val();
     // empty elements to be replaced
+    pageTitle.empty();
     cardNameEl.empty();
     setEl.empty();
     cardArtDiv.empty();
@@ -54,6 +56,8 @@ function appendCardInfo() {
     tcgPlayerLinkEl.empty();
 
     // change text of elements to match id of url
+    pageTitle.text(`${cardInfo.name} - ${cardInfo.set.name}`);
+
     cardNameEl.text(cardInfo.name);
 
     setEl.text(cardInfo.set.name);

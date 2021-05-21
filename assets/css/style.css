@@ -54,7 +54,12 @@ select {
     border: 2px solid var(--logoyellowshadow);
     background: var(--logoyellowshadow);
 }
+@media only screen and (max-width:993px){
+}
 @media only screen and (max-width: 600px) {
+    .lrgDivider {
+        display: none;
+    }
     .info {
         text-align: center;
     }
