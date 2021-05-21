@@ -104,7 +104,6 @@ function createPagination() {
         resultsDiv.append(paginationEl);
         $('.pageButton').on('click', function() {
             pageIndex = $(this).data('index')
-            checkCrypto();
             searchCards();
         })
         $('.nextButton').on('click', function() {
@@ -116,7 +115,6 @@ function createPagination() {
             else if((pageIndex + 1) - (paginationIndex*8) < totalPageButtons.length) {
                 pageIndex ++;
             }
-            checkCrypto();
             searchCards();
         })
         $('.prevButton').on('click', function() {
@@ -133,7 +131,6 @@ function createPagination() {
             if((pageIndex + 1) === cardData.length/8) {
                 $('.nextButton').addClass('disabled')
             }
-            checkCrypto();
             searchCards();
         })
     }
@@ -258,11 +255,9 @@ function searchCards() {
                 })
                 if(prices[0] != undefined) {
                     var finalPrice = JSON.stringify(prices[0].mid);
-                    console.log(chosenCurrency)
                     if(chosenCurrency != "USD") {
                         var usdPrice = prices[0].mid
                         var cryptoPrice = usdPrice * cryptoConversion
-                        console.log(cryptoSymbol);
                         var priceStringLong = `${cryptoPrice}`
                         var priceString = priceStringLong.substr(0, 7)
                         priceEl.text(`${priceString} ${cryptoSymbol}`)
@@ -365,7 +360,6 @@ function init() {
         if(onIntro == true) {
             onIntro = false;
         }
-        checkCrypto();
         pageIndex = 0
         paginationIndex = 0;
         favoritesShown = false;
@@ -379,7 +373,6 @@ function init() {
                 onIntro = false;
             }
             event.preventDefault();
-            checkCrypto();
             favoritesShown = false;
             pageIndex = 0;
             paginationIndex = 0;
@@ -432,7 +425,6 @@ currencySelector.on('change', function() {
         if(onIntro == true) {
             onIntro = false;
         }
-        checkCrypto();
         favoritesShown = true;
         pageIndex = 0;
         populateFavorites();
