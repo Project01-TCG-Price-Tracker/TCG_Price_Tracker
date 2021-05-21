@@ -199,6 +199,14 @@ function checkCrypto() {
         if(chosenCurrency != "USD") {
             getCryptoPrice(chosenCurrency);
         }
+        else if(onIntro == false) {
+            if(favoritesShown) {
+                populateFavorites()
+            }
+            else {
+                searchCards()
+            }
+        }
     }
 }
 
@@ -417,6 +425,10 @@ typesCheck.on("click", function() {
 });
 currencySelector.on('change', function() {
     checkCrypto()
+    var selectedCurrency = currencySelector.val()
+    if(selectedCurrency == "USD") {
+
+    }
 
 })
     viewFavoritesButton.on('click', function() {
