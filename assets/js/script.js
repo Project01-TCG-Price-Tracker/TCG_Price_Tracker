@@ -210,6 +210,49 @@ function checkCrypto() {
     }
 }
 
+// function to get bitcoin price
+
+function getCryptoPrice(crypto) {
+    var settings = {
+        "url": `https:api.coincap.io/v2/assets/${crypto}`,
+        "method": "GET",
+        "timeout": 0,
+      };
+      
+      $.ajax(settings).done(function (response) {
+        var usdPrice = response.data.priceUsd
+        cryptoSymbol = response.data.symbol
+        cryptoConversion = 1 / usdPrice;
+        if(onIntro == false) {
+            if(favoritesShown) {
+                populateFavorites()
+            }
+            else {
+                searchCards()
+            }
+    }
+      });
+}
+
+// function to check current crypto selected
+
+function checkCrypto() {
+    if(chosenCurrency != currencySelector.val()) {
+        var chosenCurrency = currencySelector.val()
+        if(chosenCurrency != "USD") {
+            getCryptoPrice(chosenCurrency);
+        }
+        else if(onIntro == false) {
+            if(favoritesShown) {
+                populateFavorites()
+            }
+            else {
+                searchCards()
+            }
+        }
+    }
+}
+
 // function to populate with favorites
 
 function populateFavorites() {
@@ -269,7 +312,9 @@ function searchCards() {
                         var priceStringLong = `${cryptoPrice}`
                         var priceString = priceStringLong.substr(0, 7)
                         priceEl.text(`${priceString} ${cryptoSymbol}`)
-                    } else {
+
+                    }
+                    else {
                         if(finalPrice.includes('.')) {
                             var periodIndex = finalPrice.indexOf('.')
                             var cents = finalPrice.substr(periodIndex)
@@ -284,7 +329,9 @@ function searchCards() {
                 } else {
                     priceEl.text("No Price")
                 }
+
             } else {
+
                 priceEl.text("No Price")
             }
             favButton.append(favIcon)
