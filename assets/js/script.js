@@ -232,13 +232,11 @@ function searchCards() {
             var cardContainer = $("<div>").addClass('cardContainer col s3 push-s1')
             var imageContainer = $('<div>')
             var textContainer = $('<div>')
-            var favButton = $('<a>').addClass('btn-floating favbutton waves-effect grey').attr('style', "top: -30px").data('card', cardData[i].id)
+            var favButton = $('<a>').addClass('btn-floating favbutton waves-effect waves-yellow grey').attr('style', "top: -30px").data('card', cardData[i].id)
             for(l = 0;l < favoritesList.length; l++) {
                 if(favoritesList[l].id === cardData[i].id) {
+                    favButton.removeClass('waves-yellow grey')
                     favButton.addClass('yellow accent-4')
-                }
-                else {
-                    favButton.addClass('grey')
                 }
             }
             var favIcon = $('<i>').addClass('material-icons').text("star")
