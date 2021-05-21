@@ -13,6 +13,16 @@
     --logoblue: #3B4CCA;
 }
 
+.infoContainer {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--grayweb);
+    border-radius: 10px;
+}
+.materialboxed {
+    display: inline;
+}
+
 #currency {
     margin-top: 0.75em;
 }
@@ -44,11 +54,10 @@ select {
     border: 2px solid var(--logoyellowshadow);
     background: var(--logoyellowshadow);
 }
-/* @media only screen and (min-width: 992px) {
-    .container
-    .center {
-        float: right;
+@media only screen and (max-width: 600px) {
+    .info {
+        text-align: center;
     }
 
-} */
+}
 

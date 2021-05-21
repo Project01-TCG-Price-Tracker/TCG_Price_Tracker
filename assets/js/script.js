@@ -164,7 +164,50 @@ function loadFavorites() {
             var cardObject = JSON.parse(cardDataPre[i])
             favoritesList.push(cardObject);
         }
-  }
+    }
+}
+
+// function to get bitcoin price
+
+function getCryptoPrice(crypto) {
+    var settings = {
+        "url": `https:api.coincap.io/v2/assets/${crypto}`,
+        "method": "GET",
+        "timeout": 0,
+    };
+    
+    $.ajax(settings).done(function (response) {
+        var usdPrice = response.data.priceUsd
+        cryptoSymbol = response.data.symbol
+        cryptoConversion = 1 / usdPrice;
+        if(onIntro == false) {
+            if(favoritesShown) {
+                populateFavorites()
+            }
+            else {
+                searchCards()
+            }
+        }
+    });
+}
+
+// function to check current crypto selected
+
+function checkCrypto() {
+    if(chosenCurrency != currencySelector.val()) {
+        var chosenCurrency = currencySelector.val()
+        if(chosenCurrency != "USD") {
+            getCryptoPrice(chosenCurrency);
+        }
+        else if(onIntro == false) {
+            if(favoritesShown) {
+                populateFavorites()
+            }
+            else {
+                searchCards()
+            }
+        }
+    }
 }
 
 // function to get bitcoin price
@@ -253,7 +296,9 @@ function searchCards() {
             var nameEl = $('<span>').addClass('cardName').text(name)
             var setEl = $('<p>').addClass('cardSet').text(set)
             var priceEl = $('<p>').addClass('cardPrice')
-            var imageEl = $("<img>").attr({src: cardData[i].images.large, width: 250}).addClass('materialboxed responsive-img')
+            var imageEl = $("<img>").attr({src: cardData[i].images.large, width: 250}).addClass('responsive-img')
+            var id = cardData[i].id
+            var imageLink = $("<a>").attr({"href": `./cardpage.html?id=${id}`, "target": "_blank"}).append(imageEl)
             if (cardData[i].tcgplayer != undefined) {
                 var prePrices = cardData[i].tcgplayer.prices
                 var prices = $.map(prePrices, function (value, index) {
@@ -267,6 +312,7 @@ function searchCards() {
                         var priceStringLong = `${cryptoPrice}`
                         var priceString = priceStringLong.substr(0, 7)
                         priceEl.text(`${priceString} ${cryptoSymbol}`)
+
                     }
                     else {
                         if(finalPrice.includes('.')) {
@@ -280,16 +326,16 @@ function searchCards() {
                         }
                         priceEl.text(`$${finalPrice}`)
                     }
-                }
-                else {
+                } else {
                     priceEl.text("No Price")
                 }
-            }
-            else {
+
+            } else {
+
                 priceEl.text("No Price")
             }
             favButton.append(favIcon)
-            imageContainer.append(imageEl)
+            imageContainer.append(imageLink)
             imageContainer.append(favButton)
             cardContainer.append(imageContainer)
             textContainer.append(nameEl)
