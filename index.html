@@ -18,9 +18,20 @@
             <div class="nav-wrapper blue darken-4">
                 <a href="#" data-target="slide-out" class="sidenav-trigger left yellow-text text-accent-3"><i class="material-icons">menu_open</i></a>
                 <div class="container">
-
                     <div class="row">
                         <a href="./index.html" class="brand-logo center yellow-text text-darken-4"><img src="./assets/images/tcgpt-logo_rs2.png" alt="TCG Price Tracker Logo" class="responsive-img"></a>
+                        <div class="col s1 right">
+                            <select id="currency" class="browser-default">
+                                <option selected value="USD">USD</option>
+                                <option value="bitcoin">BTC</option>
+                                <option value="ethereum">ETH</option>
+                                <option value="binance-coin">BNB</option>
+                                <option value="tether">USDT</option>
+                                <option value="cardano">ADA</option>
+                                <option value="xrp">XRP</option>
+                                <option value="dogecoin">DOGE</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,7 +65,7 @@
                                 </form>
                             </div>
                             <div class="col s6">
-                                <select id="dropdown1" class="browser-default rarityDropdown">
+                                <select disabled id="dropdown1" class="browser-default rarityDropdown">
                                     <option value="" disabled selected>Choose:</option>
                                     <option value="amazing rare">Amazing Rare</option>
                                     <option value="common">Common</option>
@@ -92,7 +103,7 @@
                         </form>
                     </div>
                     <div class="col s6">
-                        <select id="dropdown2" class="browser-default supertypeDropdown">
+                        <select disabled id="dropdown2" class="browser-default supertypeDropdown">
                             <option value="" disabled selected>Choose:</option>
                             <option value="energy">Energy</option>
                             <option value="pokemon">Pokémon</option>
@@ -110,7 +121,7 @@
                         </form>
                     </div>
                     <div class="col s6">
-                        <select class="browser-default subtypeDropdown" id="dropdown3">
+                        <select disabled class="browser-default subtypeDropdown" id="dropdown3">
                             <option value="" disabled selected>Choose:</option>
                             <option value="break">BREAK</option>
                             <option value="baby">Baby</option>
@@ -148,7 +159,7 @@
                         </form>
                     </div>
                     <div class="col s6">
-                        <select class="browser-default typeDropdown" id="dropdown4">
+                        <select disabled class="browser-default typeDropdown" id="dropdown4">
                             <option value="" disabled selected>Choose:</option>
                             <option value="colorless">Colorless</option>
                             <option value="darkness">Darkness</option>
@@ -277,5 +288,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js%22%3E"></script>
     <script src="./assets/js/script.js"></script>
+    <script>$(document).ready(function() {
+        $(".sidenav").sidenav();
+    })</script>
 </body>
 </html>

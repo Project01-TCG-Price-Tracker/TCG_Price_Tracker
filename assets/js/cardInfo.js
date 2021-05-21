@@ -11,15 +11,16 @@ var midPriceEl = $("#midprice");
 var highPriceEl = $("#highprice");
 var marketPriceEl = $("#marketprice");
 var tcgPlayerLinkEl = $("#tcgplayerlink");
+var currencySelector = $("#currency");
 
+var cryptoSymbol;
+var cryptoConversion;
 
 // function to ajax a card's individual id
 function getCardInfo() {
     // get id by making the card page's url end with the id
     var pageUri = document.documentURI;
-    console.log(pageUri);
     var id = pageUri.substr(pageUri.indexOf("=")+ 1);
-    console.log(id);
     
     var cardUrl = `https://api.pokemontcg.io/v2/cards/${id}`;
     
@@ -37,6 +38,7 @@ function getCardInfo() {
 
 // function to append card info to page
 function appendCardInfo() {
+    var chosenCurrency = currencySelector.val();
     // empty elements to be replaced
     cardNameEl.empty();
     setEl.empty();
@@ -87,12 +89,36 @@ function appendCardInfo() {
             return [value];
         })
         if (prices[0] != undefined) {
-            console.log(prices[0]);
             var lowPrice = JSON.stringify(prices[0].low);
             var midPrice = JSON.stringify(prices[0].mid);
             var highPrice = JSON.stringify(prices[0].high);
             var marketPrice = JSON.stringify(prices[0].market);
+            if (chosenCurrency != "USD") {
+                var usdLowPrice = prices[0].low;
+                var usdMidPrice = prices[0].mid;
+                var usdHighPrice = prices[0].high;
+                var usdMarketPrice = prices[0].market;
+                
+                var cryptoLowPrice = cryptoConversion*usdLowPrice;
+                var cryptoMidPrice = cryptoConversion*usdMidPrice;
+                var cryptoHighPrice = cryptoConversion*usdHighPrice;
+                var cryptoMarketPrice = cryptoConversion*usdMarketPrice;
+                
+                var lowPriceStringLong = `${cryptoLowPrice}`;
+                var midPriceStringLong = `${cryptoMidPrice}`;
+                var highPriceStringLong = `${cryptoHighPrice}`;
+                var marketPriceStringLong = `${cryptoMarketPrice}`;
 
+                var lowPriceString = lowPriceStringLong.substr(0, 7);
+                var midPriceString = midPriceStringLong.substr(0, 7);
+                var highPriceString = highPriceStringLong.substr(0, 7);
+                var marketPriceString = marketPriceStringLong.substr(0, 7);
+
+                lowPriceEl.text(`${lowPriceString} ${cryptoSymbol}`);
+                midPriceEl.text(`${midPriceString} ${cryptoSymbol}`);
+                highPriceEl.text(`${highPriceString} ${cryptoSymbol}`);
+                marketPriceEl.text(`${marketPriceString} ${cryptoSymbol}`);
+            } else {
             if(lowPrice.includes('.')) {
                 var periodIndex = lowPrice.indexOf('.')
                 var cents = lowPrice.substr(periodIndex)
@@ -133,6 +159,7 @@ function appendCardInfo() {
             midPriceEl.text(`$${midPrice}`);
             highPriceEl.text(`$${highPrice}`);
             marketPriceEl.text(`$${marketPrice}`);
+            }
         } else {
             lowPriceEl.text("No Price");
             midPriceEl.text("No Price");
@@ -150,4 +177,36 @@ function appendCardInfo() {
     tcgPlayerLinkEl.append(tcgPlayerLink);
 }
 
+// function to ajax crypto prices
+function getCryptoPrice(crypto) {
+    var settings = {
+        "url": `https:api.coincap.io/v2/assets/${crypto}`,
+        "method": "GET",
+        "timeout": 0,
+    };
+
+    $.ajax(settings).done(function (response) {
+        var usdPrice = response.data.priceUsd
+        cryptoSymbol = response.data.symbol
+        cryptoConversion = 1 / usdPrice;
+        appendCardInfo();
+    });
+}
+
+// function to check page's crypto selection
+function checkCrypto() {
+    if (chosenCurrency != currencySelector.val()) {
+        var chosenCurrency = currencySelector.val();
+        if (chosenCurrency != "USD") {
+            getCryptoPrice(chosenCurrency);
+        } else {
+            appendCardInfo();
+        }
+    }
+}
+
 getCardInfo();
+
+currencySelector.on('change', function() {
+    checkCrypto();
+})
