@@ -236,7 +236,9 @@ function searchCards() {
             var nameEl = $('<span>').addClass('cardName').text(name)
             var setEl = $('<p>').addClass('cardSet').text(set)
             var priceEl = $('<p>').addClass('cardPrice')
-            var imageEl = $("<img>").attr({src: cardData[i].images.large, width: 250}).addClass('materialboxed responsive-img')
+            var imageEl = $("<img>").attr({src: cardData[i].images.large, width: 250}).addClass('responsive-img')
+            var id = cardData[i].id
+            var imageLink = $("<a>").attr({"href": `./cardpage.html?id=${id}`, "target": "_blank"}).append(imageEl)
             if (cardData[i].tcgplayer != undefined) {
                 var prePrices = cardData[i].tcgplayer.prices
                 var prices = $.map(prePrices, function (value, index) {
@@ -260,7 +262,7 @@ function searchCards() {
                 priceEl.text("No Price")
             }
             favButton.append(favIcon)
-            imageContainer.append(imageEl)
+            imageContainer.append(imageLink)
             imageContainer.append(favButton)
             cardContainer.append(imageContainer)
             textContainer.append(nameEl)
