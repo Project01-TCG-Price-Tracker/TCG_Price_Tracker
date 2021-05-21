@@ -82,7 +82,7 @@ function createUrl(name) {
 
 function createPagination() {
     if(cardData.length != 0) {
-        var paginationEl = $('<ul>').addClass('pagination col s12 push-s1')
+        var paginationEl = $('<ul>').addClass('pagination col s12 push-l1')
         var pageAmount = (totalResults - ((paginationIndex * 12) * 8))/12
         var leftArrowItem = $('<li>').addClass('waves-effect prevButton')
         var leftIcon = $('<i>').addClass('material-icons').text('chevron_left')
@@ -171,7 +171,7 @@ function loadFavorites() {
 
 function getCryptoPrice(crypto) {
     var settings = {
-        "url": `https:api.coincap.io/v2/assets/${crypto}`,
+        "url": `https://api.coincap.io/v2/assets/${crypto}`,
         "method": "GET",
         "timeout": 0,
     };
@@ -226,18 +226,18 @@ function searchCards() {
     loadFavorites();
     resultsDiv.empty()
     if(favoritesShown) {
-        resultsDivHeader.text('Favorites List')
+        resultsDivHeader.text('Favorites List').addClass("float-right")
     }
     else {
-        resultsDivHeader.text('Search Results')
+        resultsDivHeader.text('Search Results').addClass("float-right")
     }
     createPagination();
     var pageModifier = pageIndex*12;
     var cardsRow = $('<div>').addClass('row center')
     for (i = pageModifier; i < (pageModifier+12); i++) {
         if(cardData[i] != undefined) {
-            var divider = $('<div>').addClass('col s12')
-            var cardContainer = $("<div>").addClass('cardContainer col s3 push-s1')
+            var divider = $('<div>').addClass('col s12 lrgDivider')
+            var cardContainer = $("<div>").addClass('cardContainer col s12 m6 l3 push-l1')
             var imageContainer = $('<div>')
             var textContainer = $('<div>')
             var favButton = $('<a>').addClass('btn-floating favbutton waves-effect waves-yellow grey').attr('style', "top: -30px").data('card', cardData[i].id)
@@ -301,7 +301,7 @@ function searchCards() {
             } 
             if(i === 249) {
                 if(favoritesShown != true) {
-                    var maxWarning = $('<h4>').text('Max results reached - Narrow your search criteria to see more!').addClass('col s12 center push-s1')
+                    var maxWarning = $('<h4>').text('Max results reached - Narrow your search criteria to see more!').addClass('col s12 center push-l1')
                     cardsRow.append(maxWarning)
                 }
             }
@@ -310,11 +310,11 @@ function searchCards() {
     resultsDiv.append(cardsRow);
     if(cardData.length === 0) {
         if(favoritesShown) {
-            var noResults = $("<h4>").text("No Favorites Added!").addClass("col s12 center push-s1")
+            var noResults = $("<h4>").text("No Favorites Added!").addClass("col s12 center push-l1")
             resultsDiv.append(noResults);
         }
         else {
-            var noResults = $("<h4>").text("No Results Found!").addClass("col s12 center push-s1")
+            var noResults = $("<h4>").text("No Results Found!").addClass("col s12 center push-l1")
             resultsDiv.append(noResults);
         }
     }
