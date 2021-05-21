@@ -13,6 +13,10 @@
     --logoblue: #3B4CCA;
 }
 
+#currency {
+    margin-top: 0.75em;
+}
+
 #criteriaContainer {
     width: 85%;
     margin-top: 1em;

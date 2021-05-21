@@ -14,11 +14,14 @@ var subtypeDropdown = $(".subtypeDropdown")
 var typesDropdown = $(".typeDropdown");
 var viewFavoritesButton = $('.viewFavorites');
 var resultsDivHeader = $(".resultsDivText");
+var currencySelector = $("#currency");
 
 
 // global variables for timer/price mode
 
-
+var cryptoConversion;
+var cryptoSymbol;
+var currency;
 
 // global variable for searched text/checked criteria/page
 
@@ -33,38 +36,10 @@ var typeChosen = typesCheck[0].checked;
 var cardData;
 var favoritesShown = false;
 var favoritesList = [];
+var onIntro = true;
 
 
-// listener to add functionality to checks 
 
-rarityCheck.on("click", function() {
-    if (rarityChosen == false) {
-        rarityChosen = true;
-    } else {
-        rarityChosen = false;
-    }
-});
-supertypeCheck.on("click", function() {
-    if (supertypeChosen == false) {
-        supertypeChosen = true;
-    } else {
-        supertypeChosen = false;
-    }
-});
-subtypeCheck.on("click", function() {
-    if (subtypeChosen == false) {
-        subtypeChosen = true;
-    } else {
-        subtypeChosen = false;
-    }
-});
-typesCheck.on("click", function() {
-    if (typeChosen == false) {
-        typeChosen = true;
-    } else {
-        typeChosen = false;
-    }
-});
 
 
 // function to check criteria and create API URL
@@ -129,6 +104,7 @@ function createPagination() {
         resultsDiv.append(paginationEl);
         $('.pageButton').on('click', function() {
             pageIndex = $(this).data('index')
+            checkCrypto();
             searchCards();
         })
         $('.nextButton').on('click', function() {
@@ -140,6 +116,7 @@ function createPagination() {
             else if((pageIndex + 1) - (paginationIndex*8) < totalPageButtons.length) {
                 pageIndex ++;
             }
+            checkCrypto();
             searchCards();
         })
         $('.prevButton').on('click', function() {
@@ -156,6 +133,7 @@ function createPagination() {
             if((pageIndex + 1) === cardData.length/8) {
                 $('.nextButton').addClass('disabled')
             }
+            checkCrypto();
             searchCards();
         })
     }
@@ -192,6 +170,33 @@ function loadFavorites() {
   }
 }
 
+// function to get bitcoin price
+
+function getCryptoPrice(crypto) {
+    var settings = {
+        "url": `https:api.coincap.io/v2/assets/${crypto}`,
+        "method": "GET",
+        "timeout": 0,
+      };
+      
+      $.ajax(settings).done(function (response) {
+        var usdPrice = response.data.priceUsd
+        cryptoSymbol = response.data.symbol
+        cryptoConversion = 1 / usdPrice;
+      });
+}
+
+// function to check current crypto selected
+
+function checkCrypto() {
+    if(chosenCurrency != currencySelector.val()) {
+        var chosenCurrency = currencySelector.val()
+        if(chosenCurrency != "USD") {
+            getCryptoPrice(chosenCurrency);
+        }
+    }
+}
+
 // function to populate with favorites
 
 function populateFavorites() {
@@ -204,6 +209,7 @@ function populateFavorites() {
 // function to populate cards in the searchResults div
 
 function searchCards() {
+    var chosenCurrency = currencySelector.val()
     loadFavorites();
     resultsDiv.empty()
     if(favoritesShown) {
@@ -244,17 +250,31 @@ function searchCards() {
                 })
                 if(prices[0] != undefined) {
                     var finalPrice = JSON.stringify(prices[0].mid);
-                    if(finalPrice.includes('.')) {
-                        var periodIndex = finalPrice.indexOf('.')
-                        var cents = finalPrice.substr(periodIndex)
-                        if(cents.length == 2) {
-                            finalPrice = finalPrice + "0"
+                    console.log(chosenCurrency)
+                    if(chosenCurrency != "USD") {
+                        var usdPrice = prices[0].mid
+                        var cryptoPrice = usdPrice * cryptoConversion
+                        console.log(cryptoSymbol);
+                        var priceStringLong = `${cryptoPrice}`
+                        var priceString = priceStringLong.substr(0, 7)
+                        priceEl.text(`${priceString} ${cryptoSymbol}`)
+                    }
+                    else {
+                        if(finalPrice.includes('.')) {
+                            var periodIndex = finalPrice.indexOf('.')
+                            var cents = finalPrice.substr(periodIndex)
+                            if(cents.length == 2) {
+                                finalPrice = finalPrice + "0"
+                            }
+                        } else {
+                            finalPrice = finalPrice + ".00"
                         }
-                    } else {
-                        finalPrice = finalPrice + ".00"
+                        priceEl.text(`$${finalPrice}`)
                     }
                 }
-                priceEl.text(`$${finalPrice}`)
+                else {
+                    priceEl.text("No Price")
+                }
             }
             else {
                 priceEl.text("No Price")
@@ -330,9 +350,14 @@ function searchCards() {
 // function to run when webpage is loaded
 
 function init() {
+
     
     // Apply click event to search button
     searchButton.on('click', function() {
+        if(onIntro == true) {
+            onIntro = false;
+        }
+        checkCrypto();
         pageIndex = 0
         paginationIndex = 0;
         favoritesShown = false;
@@ -342,14 +367,74 @@ function init() {
     // keypress listener to run search on enter key pressed
     $(document).keypress(function(event) {
         if (event.which == 13) {
+            if(onIntro == true) {
+                onIntro = false;
+            }
             event.preventDefault();
+            checkCrypto();
             favoritesShown = false;
             pageIndex = 0;
             paginationIndex = 0;
             pullCardData();
         }
     })
+    // listener to add functionality to checks 
+
+rarityCheck.on("click", function() {
+    if (rarityChosen == false) {
+        rarityChosen = true;
+        rarityDropdown.prop('disabled', false)
+    } else {
+        rarityChosen = false;
+        rarityDropdown.prop('disabled', true)
+    }
+});
+supertypeCheck.on("click", function() {
+    if (supertypeChosen == false) {
+        supertypeChosen = true;
+        supertypeDropdown.prop('disabled', false)
+    } else {
+        supertypeChosen = false;
+        supertypeDropdown.prop('disabled', true)
+    }
+});
+subtypeCheck.on("click", function() {
+    if (subtypeChosen == false) {
+        subtypeChosen = true;
+        subtypeDropdown.prop('disabled', false)
+    } else {
+        subtypeChosen = false;
+        subtypeDropdown.prop('disabled', true)
+    }
+});
+typesCheck.on("click", function() {
+    if (typeChosen == false) {
+        typeChosen = true;
+        typesDropdown.prop('disabled', false)
+    } else {
+        typeChosen = false;
+        typesDropdown.prop('disabled', true)
+    }
+});
+currencySelector.on('change', function() {
+    checkCrypto()
+    if(onIntro == false) {
+        $.when(checkCrypto()).done(function() {
+            if(favoritesShown) {
+                populateFavorites()
+            }
+            else {
+                searchCards()
+            }
+        })
+
+    }
+})
     viewFavoritesButton.on('click', function() {
+        if(onIntro == true) {
+            onIntro = false;
+        }
+        checkCrypto();
         favoritesShown = true;
         pageIndex = 0;
         populateFavorites();
