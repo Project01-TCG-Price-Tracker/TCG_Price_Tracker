@@ -183,6 +183,14 @@ function getCryptoPrice(crypto) {
         var usdPrice = response.data.priceUsd
         cryptoSymbol = response.data.symbol
         cryptoConversion = 1 / usdPrice;
+        if(onIntro == false) {
+            if(favoritesShown) {
+                populateFavorites()
+            }
+            else {
+                searchCards()
+            }
+    }
       });
 }
 
@@ -418,17 +426,7 @@ typesCheck.on("click", function() {
 });
 currencySelector.on('change', function() {
     checkCrypto()
-    if(onIntro == false) {
-        $.when(checkCrypto()).done(function() {
-            if(favoritesShown) {
-                populateFavorites()
-            }
-            else {
-                searchCards()
-            }
-        })
 
-    }
 })
     viewFavoritesButton.on('click', function() {
         if(onIntro == true) {
