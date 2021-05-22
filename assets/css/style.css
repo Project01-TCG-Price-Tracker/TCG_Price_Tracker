@@ -35,6 +35,14 @@ main {
     padding-top: 0.25em;
     font-size: 30px;
 }
+.card .card-content p{
+    padding-bottom: 1.25em;
+}
+.card .card-content .card-title{
+    padding-bottom: 1em;
+    padding-top: 0.25em;
+    font-size: 30px;
+}
 .materialboxed {
     display: inline;
 }
