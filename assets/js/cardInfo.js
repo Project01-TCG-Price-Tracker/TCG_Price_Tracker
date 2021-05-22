@@ -184,7 +184,7 @@ function appendCardInfo() {
 // function to ajax crypto prices
 function getCryptoPrice(crypto) {
     var settings = {
-        "url": `https:api.coincap.io/v2/assets/${crypto}`,
+        "url": `https://api.coincap.io/v2/assets/${crypto}`,
         "method": "GET",
         "timeout": 0,
     };
