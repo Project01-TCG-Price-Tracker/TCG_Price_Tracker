@@ -15,6 +15,7 @@ var typesDropdown = $(".typeDropdown");
 var viewFavoritesButton = $('.viewFavorites');
 var resultsDivHeader = $(".resultsDivText");
 var currencySelector = $("#currency");
+var sideBarImage = $("#sideBarImage")
 
 
 // global variables for timer/price mode
@@ -91,7 +92,7 @@ function createPagination() {
         for(i = 0;i < pageAmount && i < 8; i++) {
             var pageButton = $('<li>').addClass('waves-effect pageButton').data('index', i + (paginationIndex*8))
             if(pageIndex === i + (paginationIndex*8)) {
-                pageButton.addClass('active blue darken-4')
+                pageButton.addClass('active purple darken-4')
             }
             var pageLink = $('<a>').text(i + 1 + (paginationIndex*8))
             pageButton.append(pageLink)
@@ -167,29 +168,6 @@ function loadFavorites() {
     }
 }
 
-// function to get bitcoin price
-
-function getCryptoPrice(crypto) {
-    var settings = {
-        "url": `https://api.coincap.io/v2/assets/${crypto}`,
-        "method": "GET",
-        "timeout": 0,
-    };
-    
-    $.ajax(settings).done(function (response) {
-        var usdPrice = response.data.priceUsd
-        cryptoSymbol = response.data.symbol
-        cryptoConversion = 1 / usdPrice;
-        if(onIntro == false) {
-            if(favoritesShown) {
-                populateFavorites()
-            }
-            else {
-                searchCards()
-            }
-        }
-    });
-}
 
 // function to check current crypto selected
 
@@ -214,7 +192,7 @@ function checkCrypto() {
 
 function getCryptoPrice(crypto) {
     var settings = {
-        "url": `https:api.coincap.io/v2/assets/${crypto}`,
+        "url": `https://api.coincap.io/v2/assets/${crypto}`,
         "method": "GET",
         "timeout": 0,
       };
@@ -234,24 +212,6 @@ function getCryptoPrice(crypto) {
       });
 }
 
-// function to check current crypto selected
-
-function checkCrypto() {
-    if(chosenCurrency != currencySelector.val()) {
-        var chosenCurrency = currencySelector.val()
-        if(chosenCurrency != "USD") {
-            getCryptoPrice(chosenCurrency);
-        }
-        else if(onIntro == false) {
-            if(favoritesShown) {
-                populateFavorites()
-            }
-            else {
-                searchCards()
-            }
-        }
-    }
-}
 
 // function to populate with favorites
 
@@ -270,9 +230,11 @@ function searchCards() {
     resultsDiv.empty()
     if(favoritesShown) {
         resultsDivHeader.text('Favorites List')
+        sideBarImage.attr('src', "https://media0.giphy.com/media/bXguSfnEakGFG/giphy.gif")
     }
     else {
         resultsDivHeader.text('Search Results')
+        sideBarImage.attr('src', "http://getintopik.com/wp-content/uploads/2020/12/Free-Mewtwo-Pokemon-PNG-Image-Background-1024x1024.png")
     }
     createPagination();
     var pageModifier = pageIndex*12;

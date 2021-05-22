@@ -27,15 +27,25 @@
 main {
     background-image: linear-gradient(90deg, #C9C9C9,hsl(0, 0%, 74%));
 }
+.card .card-content p{
+    padding-bottom: 1.25em;
+}
+.card .card-content .card-title{
+    padding-bottom: 1em;
+    padding-top: 0.25em;
+    font-size: 30px;
+}
 .materialboxed {
     display: inline;
 }
-
+.backgroundImg {
+    position:fixed;
+}
 #currency {
     margin-top: 0.75em;
 }
 html {
-    overflow: auto;
+    overflow:   auto;
   }
   ::-webkit-scrollbar {
       width: 0px;
@@ -46,9 +56,9 @@ html {
     width: 85%;
     margin-top: 1em;
     padding: 1em;
-    border: 2px solid var(--logoyellow);
+    border: 2px solid white;
     border-radius: 5px;
-    background: var(--logoblue);
+    /* background: var(--logoblue); */
 }
 .criteriaRow {
     margin-top: 0.25em;
