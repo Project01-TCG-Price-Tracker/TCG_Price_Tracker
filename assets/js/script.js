@@ -279,10 +279,10 @@ function searchCards() {
     var cardsRow = $('<div>').addClass('row center')
     for (i = pageModifier; i < (pageModifier+12); i++) {
         if(cardData[i] != undefined) {
-            var divider = $('<div>').addClass('col s12 lrgDivider')
-            var cardContainer = $("<div>").addClass('cardContainer col s12 m6 l3 push-l1')
+            var divider = $('<div>').addClass('col s12 hide-on-small-and-down')
+            var cardContainer = $("<div>").addClass('cardContainer col s12 m3 l3 push-l1')
             var imageContainer = $('<div>')
-            var textContainer = $('<div>')
+            var textContainer = $('<div>').addClass("textContainer halign-wrapper center")
             var favButton = $('<a>').addClass('btn-floating favbutton waves-effect waves-yellow grey').attr('style', "top: -30px").data('card', cardData[i].id)
             for(l = 0;l < favoritesList.length; l++) {
                 if(favoritesList[l].id === cardData[i].id) {
