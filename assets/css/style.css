@@ -12,20 +12,58 @@
     --logoyellowshadow: #c7a008;
     --logoblue: #3B4CCA;
 }
+
 .parallax-container {
     height: 150px;
-    opacity: 0.75;
+    opacity: 0.99;
+}
+.parallax {
+    opacity: 50%;
+}
+.cardsRow {
+    background: rgba(255, 255, 255, 0.90);
+    padding: 1em 5em;
+    margin-bottom: 5em;
+    border: 1px solid var(--grayweb);
+    border-radius: 10px;
+    font-weight: bold;
+}
+.mainParallax {
+    height:fit-content;
+}
+/* #opacityUp {
+    opacity: 100%;
+} */
+.resultsDivText {
+    font-weight: bold;
+    border: 1px solid var(--grayweb);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.90);
+}
+#search-results {
+    padding: 1em 30em;
+    margin-left: 14em;
+}
+.cardInfoDiv {
+    min-height: 860px;
+}
+.indexContainer {
+    min-height: 824px;
+    overflow: hidden;
 }
 .infoContainer {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 5em;
+    margin-bottom: 5em;
     border: 1px solid var(--grayweb);
     border-radius: 10px;
     background-color: whitesmoke;
 }
 
 main {
-    background-image: linear-gradient(90deg, #C9C9C9,hsl(0, 0%, 74%));
+    background-color: linear-gradient(90deg, #C9C9C9,hsl(0, 0%, 74%));
+}
+.card .card-content p{
+    padding-bottom: 1.25em;
 }
 .card .card-content p{
     padding-bottom: 1.25em;
@@ -34,14 +72,9 @@ main {
     padding-bottom: 1em;
     padding-top: 0.25em;
     font-size: 30px;
-}
-.card .card-content p{
-    padding-bottom: 1.25em;
-}
-.card .card-content .card-title{
-    padding-bottom: 1em;
-    padding-top: 0.25em;
-    font-size: 30px;
+    border-bottom: solid 1px gray;
+    margin-bottom: 1em;
+
 }
 .materialboxed {
     display: inline;
@@ -80,12 +113,26 @@ select {
     border: 2px solid var(--logoyellowshadow);
     background: var(--logoyellowshadow);
 }
+@media only screen and (max-width:1300px){
+    #search-results {
+        padding: 1em 15em;
+        margin-left: 10em;
+    }
+}
 @media only screen and (max-width:993px){
+    #search-results {
+        padding: 1em 5em;
+        margin-left: 0;
+    }
 }
 @media only screen and (max-width: 600px) {
     .info {
         text-align: center;
     }
+    .cardInfoDiv {
+        min-height: 1400px;
+    }
+
 
 }
 

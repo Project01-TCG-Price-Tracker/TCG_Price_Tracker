@@ -83,7 +83,7 @@ function createUrl(name) {
 
 function createPagination() {
     if(cardData.length != 0) {
-        var paginationEl = $('<ul>').addClass('pagination col s12 push-l1')
+        var paginationEl = $('<ul>').addClass('pagination col s12')
         var pageAmount = (totalResults - ((paginationIndex * 12) * 8))/12
         var leftArrowItem = $('<li>').addClass('waves-effect prevButton')
         var leftIcon = $('<i>').addClass('material-icons').text('chevron_left')
@@ -225,6 +225,7 @@ function populateFavorites() {
 // function to populate cards in the searchResults div
 
 function searchCards() {
+    resultsDivHeader.css("display", "block")
     var chosenCurrency = currencySelector.val()
     loadFavorites();
     resultsDiv.empty()
@@ -238,11 +239,11 @@ function searchCards() {
     }
     createPagination();
     var pageModifier = pageIndex*12;
-    var cardsRow = $('<div>').addClass('row center')
+    var cardsRow = $('<div>').addClass('row center cardsRow')
     for (i = pageModifier; i < (pageModifier+12); i++) {
         if(cardData[i] != undefined) {
             var divider = $('<div>').addClass('col s12 hide-on-small-and-down')
-            var cardContainer = $("<div>").addClass('cardContainer col s12 m3 l3 push-l1')
+            var cardContainer = $("<div>").addClass('cardContainer col s12 m3 l3')
             var imageContainer = $('<div>')
             var textContainer = $('<div>').addClass("textContainer halign-wrapper center")
             var favButton = $('<a>').addClass('btn-floating favbutton waves-effect waves-yellow grey').attr('style', "top: -30px").data('card', cardData[i].id)
@@ -251,6 +252,9 @@ function searchCards() {
                     favButton.removeClass('waves-yellow grey')
                     favButton.addClass('yellow accent-4')
                 }
+            }
+            if(favoritesList.length == 0) {
+                favButton.addClass('grey')
             }
             var favIcon = $('<i>').addClass('material-icons').text("star")
             var name = cardData[i].name
@@ -320,11 +324,11 @@ function searchCards() {
     if(cardData.length === 0) {
         if(favoritesShown) {
             var noResults = $("<h4>").text("No Favorites Added!").addClass("col s12 center push-l1")
-            resultsDiv.append(noResults);
+            cardsRow.append(noResults);
         }
         else {
             var noResults = $("<h4>").text("No Results Found!").addClass("col s12 center push-l1")
-            resultsDiv.append(noResults);
+            cardsRow.append(noResults);
         }
     }
     $('.favbutton').on('click', function() {
@@ -368,7 +372,9 @@ function searchCards() {
 
 function init() {
 
-    
+    if(onIntro) {
+        resultsDivHeader.css("display", "none")
+    }
     // Apply click event to search button
     searchButton.on('click', function() {
         if(onIntro == true) {
