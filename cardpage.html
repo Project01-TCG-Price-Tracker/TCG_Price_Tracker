@@ -18,7 +18,7 @@
             <div class="nav-wrapper purple darken-4">
                 <div class="container">
                     <div class="row">
-                        <a href="./index.html" class="brand-logo center yellow-text text-darken-4"><img src="./assets/images/tcgpt-logo_rs2.png" alt="TCG Price Tracker Logo" class="responsive-img"></a>
+                        <a href="./index.html" class="brand-logo center"><img src="./assets/images/tcgpt-logo_rs2.png" alt="TCG Price Tracker Logo" class="responsive-img"></a>
                         <div class="col s1 right">
                             <select id="currency" class="browser-default">
                                 <option selected value="USD">USD</option>
@@ -36,6 +36,9 @@
         </nav>   
     </header>
     <main>
+        <div class="parallax-container">
+            <div class="parallax"><img src="./assets/images/galar_map.png"></div>
+        </div>
         <div class="container infoContainer z-depth-1">
             <div class="row center">
                 <div class="col s12">
@@ -46,6 +49,7 @@
             <div class="row">
                 <div class="col s12 m6 center cardart">
                     <img src="./assets/images/Pokemon_TCG_cardback.jpg" class="responsive-img materialboxed">
+                    <a style="top: -30px;" class="btn-floating favbutton waves-effect waves-yellow grey"><i class="material-icons">star</i></a>
                 </div>
                 <div class="col s12 m6 left info">
                     <div class="row">
@@ -90,6 +94,9 @@
                 </div>
             </div>
         </div>
+        <div class="parallax-container">
+            <div class="parallax"><img src="./assets/images/galar_map.png"></div>
+        </div>
     </main>
     <footer class="page-footer purple darken-3 grey-text">
         <div class="container">
@@ -97,11 +104,11 @@
                 <div class="container">
                 Made for Northwestern Coding Bootcamp by Anthony Krueger and Jared Donovan
                 <a class="grey-text text-lighten-4 right" href="https://github.com/Project01-TCG-Price-Tracker/TCG_Price_Tracker" target="_blank">GitHub Repo</a>
-
               </div>
           </div>
         </div>
       </footer>
+
 
 
     <script
@@ -111,5 +118,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js%22%3E"></script> -->
     <script src="./assets/js/cardInfo.js"></script>
+    <script>
+        $(document).ready(function() {
+                    $('.parallax').parallax();
+        })
+    </script>
 </body>
 </html>
