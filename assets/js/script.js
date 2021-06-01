@@ -334,9 +334,18 @@ function searchCards() {
     $('.favbutton').on('click', function() {
         var id = $(this).data('card')
         var savedFavorites = JSON.parse(localStorage.getItem('favorites'))
+        var favoritesIdList =[]
         if(savedFavorites == null) {
             localStorage.setItem('favorites', [])
             savedFavorites = []
+        }
+        else {
+            for(i = 0;i < savedFavorites.length; i++) {
+                var savedObject = JSON.parse(savedFavorites[i]);
+                var savedId = savedObject.id
+                favoritesIdList.push(savedId);
+            }
+            console.log(favoritesIdList)
         }
         var favUrl = `https://api.pokemontcg.io/v2/cards/${id}`
         $.ajax({
@@ -345,15 +354,13 @@ function searchCards() {
             headers: {'X-Api-Key': 'c86ef810-3077-4361-80a8-0124aa67fc83'},
         }).then(function(response) {
             var data = JSON.stringify(response.data)
-            var checkArray = savedFavorites.indexOf(data)
+            var checkArray = favoritesIdList.indexOf(id)
             if(checkArray === -1) {
                 savedFavorites.push(data)
                 localStorage.setItem('favorites', JSON.stringify(savedFavorites))
-                console.log(savedFavorites)
             } else {
                 savedFavorites.splice(checkArray, 1)
                 localStorage.setItem('favorites', JSON.stringify(savedFavorites))
-                console.log(savedFavorites)
 
             }
             if(favoritesShown) {
